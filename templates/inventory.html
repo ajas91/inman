@@ -7,9 +7,83 @@
 {% endblock scripts_and_css %}
 
 
+
 {% block main_body %}
 <!-- Add the main body for the page in this block -->
+<div class="contrainer-fluid">
+    <div class="row filter-bar mb-3 mt-2">
+        <h5>Filter Bar</h5>
+        <div class="col-7">
+            <div class="row">
+                <div class="col-sm">   
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Category
+                        </button>
+                        <ul class="dropdown-menu">
+                            {% for category in categories %}
+                                <li>
+                                    <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                                    {{category.category_name}}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <label for="code" class="form-label">Item Code</label>
+                    <input type="text" class="form-control" id="code">
+                </div>
+                <div class="col-sm">
+                    <label for="price" class="form-label">Price Less than</label>
+                    <input type="text" class="form-control" id="price">
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
 
+        </div>
+        <div class="col-2" style="text-align: right;">
+            <input class="btn btn-outline-primary" type="submit" value="Apply">
+        </div>
+    </div>
+
+    <hr>
+    
+    <div class="row mb-2 mt-2" style="text-align: right;">
+        <div class="col-10"></div>
+        <div class="col-2"><a class="btn btn-success" href={% url "new_item" %}>New Item</a></div>
+    </div>
+    
+    <div class="row mb-2">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Item Code</th>
+                <th scope="col">Item Image</th>
+                <th scope="col">Item Name</th>
+                <th scope="col">Total Cost</th>
+                <th scope="col">Selling Price</th>
+                <th scope="col">Remaining Quantity</th>
+                <th scope="col">Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in inventory %}
+                <tr>
+                    <th scope="row">{{item.id}}</th>
+                    <td>{{item.image}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{(item.purchase_price*0.1)+item.vat+item.shipping_cost+item.other_cost}}</td>
+                    <td>{{item.selling_price}}</td>
+                    <td>{{item.remaining_qty}} OMR</td>
+                    <td><a class="btn btn-primary btn-sm" href={% url "update_item" item.id %}>Check</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock main_body %}
 
 

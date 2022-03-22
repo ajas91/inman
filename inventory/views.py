@@ -4,7 +4,12 @@ from .forms import ItemForm
 
 # Create your views here.
 def inventory(request):
-    context = {}
+    inventory = Item.objects.all()
+    categories = ItemCategory.objects.all()
+    context = {'inventory':inventory,
+               'categories':categories,
+              }
+              
     render(request,'inventory.html',context=context)
 
 
