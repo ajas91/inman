@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 import orders.urls
 import customers.urls
+import customers.views
 import inventory.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # re_path('^$',form.views.index,name='index'),
+    re_path('^$',customers.views.index,name='index'),
     path('',include(customers.urls), name='customers'),
     path('',include(inventory.urls), name='inventory'),
     path('',include(orders.urls), name='orders'),
