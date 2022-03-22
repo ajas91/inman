@@ -18,7 +18,7 @@ class Item(models.Model):
     ordered_qty = models.IntegerField(default=0)
     remaining_qty = models.IntegerField(default=0)
     item_image = models.ImageField()
-    item_category = models.ForeignKey(ItemCategory)
+    item_category = models.ForeignKey(ItemCategory,on_delete=models.CASCADE)
     purchase_price = models.FloatField(default=0.0)
     vat = models.FloatField(default=0.0)
     shipping_cost = models.FloatField(default=0.0)
