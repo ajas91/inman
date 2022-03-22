@@ -23,6 +23,7 @@ class Item(models.Model):
     vat = models.FloatField(default=0.0)
     shipping_cost = models.FloatField(defaul=0.0)
     other_cost = models.FloatField(defaul=0.0)
+    profit_matgin = models.FloatField(default=0.0)
     selling_price = models.FloatField(default=0.0)
 
     def __str__(self):
