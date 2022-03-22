@@ -18,8 +18,9 @@ def inventory(request):
 def newItem(request):
     form = ItemForm()
     if request.method == 'POST':
+        form = ItemForm(request.POST)
         if form.is_valid():
-            form.save
+            form.save()
         redirect('inventory')
 
     context = { "form":form,
@@ -30,7 +31,18 @@ def newItem(request):
 
 
 def updateItem(request,pk):
-    context = {}
+    item = Item.objects.get(id=pk)
+    form = ItemForm(instance=item)
+
+    if request.method == 'POST':
+        form = ItemForm(request.POST,instance=item)
+        if form.is_valid():
+            form.save()
+        redirect('inventory')
+    
+    context = {'form':form,
+               'item':item,
+              }
     render(request,'itemDetail.html',context=context)
 
 
