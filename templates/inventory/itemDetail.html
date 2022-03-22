@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block scripts_and_css %}
+<!-- Add Additional Scripts, CSS in the header for the page in this block -->
+
+{% endblock scripts_and_css %}
+
+
+
+{% block main_body %}
+<!-- Add the main body for the page in this block -->
+<div class="contrainer-fluid" style="padding: 10% 10%;">
+    <H1>Item Details</H1>
+    <br>
+    <div class="row mb-2 mt-2" style="text-align: right;">
+        <div class="col-10"></div>
+        <div class="col-2"><a class="btn btn-success" href={% url "new_category" %}>New Category</a></div>
+    </div>
+    <form class="row g-3">
+        <div class="col-md-12">
+            <label for="image" class="form-label">Item Code</label>
+            {{form.item_image}}
+        </div>
+        <div class="col-md-6">
+            <label for="id" class="form-label">Item Code</label>
+            {{item.id}}
+        </div>
+        <div class="col-6">
+            <label for="item_name" class="form-label">Item Name</label>
+            {{form.item_name}}
+        </div>
+        <div class="col-6">
+            <label for="item_desc" class="form-label">Item Description</label>
+            {{form.desc}}
+        </div>
+        <div class="col-6">
+            <label for="item_category" class="form-label">Item Category</label>
+            {{form.item_category}}
+        </div>
+        <div class="col-3">
+            <label for="purchase_price" class="form-label">Purchase Price</label>
+            {{form.purchase_price}}
+        </div>
+        <div class="col-3">
+            <label for="vat" class="form-label">VAT</label>
+            {{form.vat}}
+        </div>
+        <div class="col-3">
+            <label for="shipping_cost" class="form-label">Shipping Cost</label>
+            {{form.shipping_cost}}
+        </div>
+        <div class="col-3">
+            <label for="other_cost" class="form-label">Other Cost</label>
+            {{form.other_cost}}
+        </div>
+        <div class="col-6">
+            <label for="profit_margin" class="form-label">Profit Margin (in Percentage %)</label>
+            {{form.profit_margin}}
+        </div>
+        <div class="col-md-6">
+            <label for="selling_price" class="form-label">Selling Price</label>
+            {{form.selling_price}}
+        </div>
+        <div class="col-6">
+            <label for="ordered_qty" class="form-label">Ordered Quantity</label>
+            {{form.ordered_qty}}
+        </div>
+        <div class="col-6">
+            <label for="remaining_qty" class="form-label">Remaining Quantity</label>
+            {{form.remaining_qty}}
+        </div>
+        
+        <div class="col-6">
+            <button type="submit" class="btn btn-success">Update</button>
+        </div>
+        <div class="col-6">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+    </form>
+</div>
+
+{% endblock main_body %}
+
+
+
+{% block scripts %}
+<!-- Add Additional Scripts at the bottom for the page in this block -->
+<script>
+</script>
+<script src="{% static 'js/inventory.js' %}"></script>
+{% endblock scripts %}
