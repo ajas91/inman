@@ -21,6 +21,13 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
     order_date = models.DateField(auto_now_add=True)
     orderline = models.ManyToManyField(OrderLine)
+    total = models.FloatField(default=0.0)
+    statusChoice = [('New','New')
+                    ('Pending Payment','Pending Payment'),
+                    ('Pending Delivery','Pending Delivery'),
+                    ('Done','Done')
+                   ]
+    status = models.TextField(choices=statusChoice,default='New')
 
     def __str__(self):
         return self.id
