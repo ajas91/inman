@@ -22,7 +22,7 @@ class Order(models.Model):
     order_date = models.DateField(auto_now_add=True)
     orderline = models.ManyToManyField(OrderLine)
     total = models.FloatField(default=0.0)
-    statusChoice = [('New','New')
+    statusChoice = [('New','New'),
                     ('Pending Payment','Pending Payment'),
                     ('Pending Delivery','Pending Delivery'),
                     ('Done','Done')
