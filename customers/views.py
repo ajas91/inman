@@ -3,20 +3,20 @@ from .models import *
 from .forms import CustomerForm
 
 # Create your views here.
-def customes(request):
+def customers(request):
     context = {}
-    render(request,'base.html',context=context)
+    return render(request,'base.html',context=context)
 
 
 
 
 def newCustomer(request):
     context = {}
-    render(request,'base.html',context=context)
+    return render(request,'base.html',context=context)
 
 
 
 
 def updateCustomer(request,pk):
     context = {}
-    render(request,'base.html',context=context)
+    return render(request,'base.html',context=context)
