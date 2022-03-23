@@ -24,7 +24,6 @@ def index(request):
 
 
     
-def customes(request):
 def customers(request):
     context = {}
     return render(request,'base.html',context=context)
