@@ -18,22 +18,9 @@ def inventory(request):
 def newItem(request):
     form = ItemForm()
     if request.method == 'POST':
-        form = ItemForm(request.POST)
-        print(f'''Details of the Item:
-                name: {form.data['item_name']}
-                desc: {form.data['desc']}
-                Ordered Quantity: {form.data['ordered_qty']}
-                Remaining Quantity: {form.data['remaining_qty']}
-                Category: {form.data['item_category']}
-                Purchase Price: {form.data['purchase_price']}
-                VAT: {form.data['vat']}
-                Shipping Cost: {form.data['shipping_cost']}
-                Other Cost: {form.data['other_cost']}
-                Profit Margin: {form.data['profit_margin']}
-                Selling Price: {form.data['selling_price']}''')
+        form = ItemForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-            # print(f'################ I am a valid form')
         return redirect('inventory')
 
     context = { "form":form,
@@ -48,7 +35,7 @@ def updateItem(request,pk):
     form = ItemForm(instance=item)
 
     if request.method == 'POST':
-        form = ItemForm(request.POST,instance=item)
+        form = ItemForm(request.POST,request.FILES,instance=item)
         if form.is_valid():
             form.save()
         return redirect('inventory')
