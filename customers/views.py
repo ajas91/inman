@@ -16,7 +16,7 @@ def index(request):
     context={"totalCustomers":totalCustomers,
              "totalToys":totalItems,
              "totalSwaps":totalOrders,
-             "totalPendingD":totalPending,
+             "totalPendingD":totalPendingD,
              "totalPendingDCount":totalPendingDCount
             }
     return render(request,'index.html',context=context)
@@ -25,19 +25,20 @@ def index(request):
 
     
 def customes(request):
+def customers(request):
     context = {}
-    render(request,'base.html',context=context)
+    return render(request,'base.html',context=context)
 
 
 
 
 def newCustomer(request):
     context = {}
-    render(request,'base.html',context=context)
+    return render(request,'base.html',context=context)
 
 
 
 
 def updateCustomer(request,pk):
     context = {}
-    render(request,'base.html',context=context)
+    return render(request,'base.html',context=context)
