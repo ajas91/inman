@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
 from .models import *
 from .forms import ItemForm, CategoryForm
 import os
@@ -63,7 +62,6 @@ def newCategory(request):
         if form.is_valid():
             form.save()
         return redirect('inventory')
-        # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     context = { 'form':form,
               }
