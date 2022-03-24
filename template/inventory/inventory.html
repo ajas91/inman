@@ -75,7 +75,6 @@
                     <td><img src = "{{ item.item_image.url }}" width="100" height="100"></td>
                     <td>{{item.item_name}}</td>
                     <td>{{item.getTotalCost}}</td>
-                    <!-- (float(item.purchase_price)*0.1)+float(item.vat)+float(item.shipping_cost)+float(item.other_cost) -->
                     <td>{{item.selling_price}}</td>
                     <td>{{item.remaining_qty}} OMR</td>
                     <td><a class="btn btn-primary btn-sm" href={% url "update_delete_item" item.id %}>Check</a></td>
