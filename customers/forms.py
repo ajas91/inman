@@ -25,6 +25,6 @@ class CustomerForm(ModelForm):
 						'id': 'address',
 						})
 		
-		self.field['number_of_orders'].widget.attrs['class'] = 'form-control'
-		self.field['number_of_orders'].widget.attrs['id'] = 'number_of_ rders'
+		self.fields['number_of_orders'].widget.attrs['class'] = 'form-control'
+		self.fields['number_of_orders'].widget.attrs['id'] = 'number_of_ rders'
 		
