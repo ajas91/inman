@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block scripts_and_css %}
+<!-- Add Additional Scripts, CSS in the header for the page in this block -->
+
+{% endblock scripts_and_css %}
+
+
+
+{% block main_body %}
+<!-- Add the main body for the page in this block -->
+<div class="row mb-2 mt-2" style="text-align: center;">
+    <div class="col-2">
+        <input type=button value="Back" class="btn btn-secondary" onClick="javascript:history.go(-1);">
+    </div>
+    <div class="col-9"></div>
+</div>
+<form id="order" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}</form>
+<form id="orderLine" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}</form>
+<div class="card">
+    <div class="card-header" style="text-align: center;"><h1> Order Details </h1></div>
+    <div class="card-body">
+        <div class="card-text">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="id" class="form-label">Order ID</label>
+                    <input type="text" class="form-control" id="id" value="{{order.id}}" readonly>
+                </div>
+                <div class="col-6">
+                    <label for="order_date" class="form-label">Order Date</label>
+                    {{orderForm.order_date}}
+                </div>
+                <div class="col-6">
+                    <label for="customer" class="form-label">Customer Name</label>
+                    {{orderForm.customer}}
+                </div>
+                <div class="col-6">
+                    <label for="status" class="form-label">Order Status</label>
+                    {{orderForm.status}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <br>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="card-text">
+            <div class="row">
+                <div class="col-2">
+                    <label for="item" class="form-label">Item</label>
+                    {{orderLineForm.item}}
+                </div>
+                <div class="col-2">
+                    <label for="item" class="form-label">Unit Price</label>
+                    <input type="text" class="omr form-control" value="0">
+                </div>
+                <div class="col-2">
+                    <label for="qty" class="form-label">Quantity</label>
+                    {{orderLineForm.qty}}
+                </div>
+                <div class="col-2">
+                    <label for="disc" class="form-label">Discount</label>
+                    {{orderLineForm.disc}}
+                </div>
+                <div class="col-2">
+                    <label for="disc" class="form-label">Total</label>
+                    {{orderLineForm.total_price}}
+                </div>
+                <div class="col-12"> <br></div>
+                {% if status == 'new' %}
+                    <div class="col-12" style="text-align: center;">
+                        <input type="submit" name="update" class="btn btn-success" value="Add" form="orderLine">
+                    </div>
+                {% else %}
+                    <div class="col-6">
+                        <input type="submit" name="update" class="btn btn-success" value="Update" form="orderLine">
+                    </div>
+                    <div class="col-6">
+                        <input type="submit" name="delete" class="btn btn-danger" value="Delete" form="orderLine">
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+                
+</div>
+
+
+{% endblock main_body %}
+
+
+
+{% block scripts %}
+<!-- Add Additional Scripts at the bottom for the page in this block -->
+<script src="{% static 'js/inventory.js' %}"></script>
+<script>
+    n = document.getElementsByClassName('omr');
+    for(let i=0;i<n.length;i++){
+        n[i].value=parseFloat(n[i].value).toFixed(3);
+    }
+
+</script>
+{% endblock scripts %}

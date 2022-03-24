@@ -129,5 +129,10 @@
         remainingQty.value = orderedQty.value;
     }
 
+    n = document.getElementsByClassName('omr');
+    for(let i=0;i<n.length;i++){
+        n[i].value=parseFloat(n[i].value).toFixed(3);
+    }
+
 </script>
 {% endblock scripts %}
