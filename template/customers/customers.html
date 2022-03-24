@@ -36,19 +36,19 @@
     <hr>
     
     <div class="row mb-2 mt-2" style="text-align: right;">
-        <div class="col-10"></div>
-        <div class="col-2"><a class="btn btn-success" href={% url "new_customer" %}>New Item</a></div>
+        <div class="col-9"></div>
+        <div class="col-2"><a class="btn btn-success" href={% url "new_customer" %}>New Customer</a></div>
     </div>
     
     <div class="row mb-2">
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Customer ID</th>
-                <th scope="col">Customer Name</th>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
                 <th scope="col">Phone Number</th>
                 <th scope="col">Address</th>
-                <th scope="col">Number of Orders</th>
+                <th scope="col"># Orders</th>
                 <th scope="col">Details</th>
             </tr>
             </thead>
@@ -59,7 +59,7 @@
                     <td>{{customer.name}}</td>
                     <td>{{customer.phone_number}}</td>
                     <td>{{customer.address}}</td>
-                    <td>{{customer.number_of_orders}} OMR</td>
+                    <td>{{customer.number_of_orders}}</td>
                     <td><a class="btn btn-primary btn-sm" href={% url "update_delete_customer" customer.id %}>Check</a></td>
                 </tr>
             {% endfor %}

@@ -25,7 +25,7 @@ def index(request):
 
     
 def customers(request):
-    customers = Item.objects.all()
+    customers = Customer.objects.all()
     context = {'customers':customers,
               }
 
