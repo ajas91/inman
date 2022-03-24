@@ -29,3 +29,6 @@ class Item(models.Model):
 
     def __str__(self):
         return self.item_name
+
+    def getTotalCost(self):
+        return self.purchase_price*0.1+self.vat+self.shipping_cost+self.other_cost

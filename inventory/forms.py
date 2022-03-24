@@ -22,6 +22,8 @@ class ItemForm(ModelForm):
 
 		self.fields['ordered_qty'].widget.attrs['class'] = 'form-control'
 		self.fields['ordered_qty'].widget.attrs['id'] = 'ordered_qty'
+		self.fields['ordered_qty'].widget.attrs['onchange'] = 'updateQTY();'
+
 
 		self.fields['remaining_qty'].widget.attrs['class'] = 'form-control'
 		self.fields['remaining_qty'].widget.attrs['id'] = 'remaining_qty'
@@ -33,22 +35,28 @@ class ItemForm(ModelForm):
 		self.fields['purchase_price'].widget.attrs['class'] = 'form-control'
 		self.fields['purchase_price'].widget.attrs['id'] = 'purchase_price'
 		self.fields['purchase_price'].widget.attrs['placeholder'] = 'Price in SAR'
+		self.fields['purchase_price'].widget.attrs['onchange'] = 'updateVAT();'
 
 		self.fields['vat'].widget.attrs['class'] = 'form-control'
 		self.fields['vat'].widget.attrs['id'] = 'vat'
+		self.fields['vat'].widget.attrs['onchange'] = 'updateSellingPrice();'
+
 
 		self.fields['shipping_cost'].widget.attrs['class'] = 'form-control'
 		self.fields['shipping_cost'].widget.attrs['id'] = 'shipping_cost'
 		self.fields['shipping_cost'].widget.attrs['placeholder'] = 'Price in OMR'
+		self.fields['shipping_cost'].widget.attrs['onchange'] = 'updateSellingPrice();'
 
 		self.fields['other_cost'].widget.attrs['class'] = 'form-control'
 		self.fields['other_cost'].widget.attrs['id'] = 'other_cost'
 		self.fields['other_cost'].widget.attrs['placeholder'] = 'Price in OMR'
 		self.fields['other_cost'].required = False
+		self.fields['other_cost'].widget.attrs['onchange'] = 'updateSellingPrice();'
 
 		self.fields['profit_margin'].widget.attrs['class'] = 'form-control'
 		self.fields['profit_margin'].widget.attrs['id'] = 'profit_margin'
 		self.fields['profit_margin'].widget.attrs['placeholder'] = 'Percentage (Number only)'
+		self.fields['profit_margin'].widget.attrs['onchange'] = 'updateSellingPrice();'
 
 		self.fields['selling_price'].widget.attrs['class'] = 'form-control'
 		self.fields['selling_price'].widget.attrs['id'] = 'selling_price'
@@ -63,5 +71,7 @@ class CategoryForm(ModelForm):
 		fields = '__all__'
 	def __init__(self,*args,**kwargs):
 		super(CategoryForm,self).__init__(*args,**kwargs)
-
-		self.fields['category_name'].widget.attrs['class']= 'form-control'
+		self.fields['category_name'].widget=TextInput(attrs = {
+						'class':'form-control',
+						'id': 'item_name',
+						})

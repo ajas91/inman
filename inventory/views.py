@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from .models import *
-from .forms import ItemForm
+from .forms import ItemForm, CategoryForm
 import os
 
 # Create your views here.
@@ -56,6 +57,15 @@ def updateDeleteItem(request,pk):
 
 
 
-def newCategory(request,pk):
-    context = {}
-    return render(request,'newCategory.html',context=context)
+def newCategory(request):
+    form = CategoryForm()
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('inventory')
+        # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    context = { 'form':form,
+              }
+    return render(request,'inventory/newCategory.html',context=context)
