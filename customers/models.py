@@ -7,7 +7,7 @@ class Customer(models.Model):
     phone_number = models.TextField(max_length=8,default="",unique=True)
     date_created = models.DateField(auto_now_add=True)
     address = models.TextField(default="")
-    numberOfOrders = models.IntegerField(default=0)
+    number_of_orders = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

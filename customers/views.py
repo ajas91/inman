@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
 from .forms import CustomerForm
 from inventory.models import *
@@ -25,19 +25,46 @@ def index(request):
 
     
 def customers(request):
-    context = {}
-    return render(request,'base.html',context=context)
+    customers = Item.objects.all()
+    context = {'customers':customers,
+              }
+
+    return render(request,'customers/customers.html',context=context)
+
 
 
 
 
 def newCustomer(request):
-    context = {}
-    return render(request,'base.html',context=context)
+    form = CustomerForm()
+    if request.method == 'POST':
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('customers')
+
+    context = { 'form':form,
+                'status':'new'
+              }
+    return render(request,'customers/customerDetail.html',context=context)
 
 
 
 
-def updateCustomer(request,pk):
-    context = {}
-    return render(request,'base.html',context=context)
+
+def updateDeleteCustomer(request,pk):
+    customer = Customer.objects.get(id=pk)
+    form = CustomerForm(instance=customer)
+    if request.method == 'POST':
+        form = CustomerForm(request.POST,instance=customer)
+        if form.is_valid() and request.POST.get('update'):
+            form.save()
+        elif request.POST.get('delete'):
+            customer.delete()
+        return redirect('customers')
+    
+    context = {'form':form,
+               'customer':customer,
+               'status':'existing'
+              }
+    return render(request,'customers/customerDetail.html',context=context)

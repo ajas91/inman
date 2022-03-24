@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block scripts_and_css %}
+<!-- Add Additional Scripts, CSS in the header for the page in this block -->
+
+{% endblock scripts_and_css %}
+
+
+
+{% block main_body %}
+<!-- Add the main body for the page in this block -->
+<div class="row mb-2 mt-2" style="text-align: center;">
+    <div class="col-2">
+        <input type=button value="Back" class="btn btn-secondary" onClick="javascript:history.go(-1);">
+    </div>
+    <div class="col-10"></div>
+</div>
+<div class="card">
+    <div class="card-header" style="text-align: center;">
+        <h1> Customer Details </h1>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <form class="row g-3" method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <label for="id" class="form-label">Customer ID</label>
+                    <input type="text" class="form-control" id="id" value="{{customer.id}}" readonly>
+                </div>
+                <div class="col-6">
+                    <label for="name" class="form-label">Customer Name</label>
+                    {{form.name}}
+                </div>
+                <div class="col-6">
+                    <label for="phone_number" class="form-label">Customer Phone Number</label>
+                    {{form.phone_number}}
+                </div>
+                <div class="col-12">
+                    <label for="address" class="form-label">Customer Address</label>
+                    {{form.address}}
+                </div>
+                <div class="col-3">
+                    <label for="number_of_orders" class="form-label">Number of Orders</label>
+                    {{form.number_of_orders}}
+                </div>
+                
+                {% if status == 'new' %}
+                    <div class="col-6">
+                        <input type="submit" name="update" class="btn btn-success" value="Add">
+                    </div>
+                {% else %}
+                    <div class="col-6">
+                        <input type="submit" name="update" class="btn btn-success" value="Update">
+                    </div>
+                    <div class="col-6">
+                        <input type="submit" name="delete" class="btn btn-danger" value="Delete">
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock main_body %}
+
+
+
+{% block scripts %}
+<!-- Add Additional Scripts at the bottom for the page in this block -->
+
+{% endblock scripts %}
