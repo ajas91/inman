@@ -38,7 +38,6 @@ def updateDeleteItem(request,pk):
     img = 'existing'
     item = Item.objects.get(id=pk)
     form = ItemForm(instance=item)
-    print(item.item_image)
     if request.method == 'POST':
         form = ItemForm(request.POST,request.FILES,instance=item)
         if form.is_valid() and request.POST.get('update'):
