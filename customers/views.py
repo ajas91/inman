@@ -12,12 +12,16 @@ def index(request):
     totalOrders = Order.objects.all().count()
     totalPendingD = Order.objects.filter(status = 'Pending Delivery')
     totalPendingDCount = totalPendingD.count()
+    totalPendingP = Order.objects.filter(status = 'Pending Payment')
+    totalPendingPCount = totalPendingP.count()
 
     context={"totalCustomers":totalCustomers,
-             "totalToys":totalItems,
-             "totalSwaps":totalOrders,
+             "totalItems":totalItems,
+             "totalOrders":totalOrders,
              "totalPendingD":totalPendingD,
-             "totalPendingDCount":totalPendingDCount
+             "totalPendingDCount":totalPendingDCount,
+             "totalPendingP":totalPendingP,
+             "totalPendingPCount":totalPendingPCount,
             }
     return render(request,'index.html',context=context)
 

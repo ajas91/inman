@@ -1,0 +1,27 @@
+.stats {
+    height: 8em;
+}
+
+.numberSpan{
+    font-size:130%;
+    font-weight: bold;
+}
+
+.card-title{
+    font-size: 100%;
+}
+
+.btn-sm{
+    padding: 1px 1px;
+    font-size: 15px;
+    border-radius: 5px;
+    width:100%; 
+}
+
+.pending{
+    color: red;
+}
+
+.filter-bar{
+    width: 100%;
+}
