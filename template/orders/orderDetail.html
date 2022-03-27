@@ -70,10 +70,18 @@
                     <label for="disc" class="form-label">Total</label>
                     {{orderLineForm.total_price}}
                 </div>
+            </div>
+
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-2" style="text-align: right;">
+                    <label for="total" class="form-label">Total</label>
+                    {{orderForm.total}}
+                </div>
                 <div class="col-12"> <br></div>
                 {% if status == 'new' %}
                     <div class="col-12" style="text-align: center;">
-                        <input type="submit" name="update" class="btn btn-success" value="Add" form="orderLine">
+                        <input type="submit" name="update" class="btn btn-success" value="Add" form="order">
                     </div>
                 {% else %}
                     <div class="col-6">
