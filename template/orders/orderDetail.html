@@ -16,87 +16,86 @@
     </div>
     <div class="col-9"></div>
 </div>
-<form id="order" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}</form>
-<form id="orderLine" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}</form>
-<div class="card">
-    <div class="card-header" style="text-align: center;"><h1> Order Details </h1></div>
-    <div class="card-body">
-        <div class="card-text">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="id" class="form-label">Order ID</label>
-                    <input type="text" class="form-control" id="id" value="{{order.id}}" readonly>
-                </div>
-                <div class="col-6">
-                    <label for="order_date" class="form-label">Order Date</label>
-                    {{orderForm.order_date}}
-                </div>
-                <div class="col-6">
-                    <label for="customer" class="form-label">Customer Name</label>
-                    {{orderForm.customer}}
-                </div>
-                <div class="col-6">
-                    <label for="status" class="form-label">Order Status</label>
-                    {{orderForm.status}}
+<form method="POST" action="" enctype="multipart/form-data" id= "test">
+    {% csrf_token %}
+    <div class="card">
+        <div class="card-header" style="text-align: center;"><h1> Order Details </h1></div>
+        <div class="card-body">
+            <div class="card-text">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="id" class="form-label">Order ID</label>
+                        <input type="text" class="form-control" id="id" value="{{order.id}}" readonly>
+                    </div>
+                    <div class="col-6">
+                        <label for="order_date" class="form-label">Order Date</label>
+                        {{orderForm.order_date}}
+                    </div>
+                    <div class="col-6">
+                        <label for="customer" class="form-label">Customer Name</label>
+                        {{orderForm.customer}}
+                    </div>
+                    <div class="col-6">
+                        <label for="status" class="form-label">Order Status</label>
+                        {{orderForm.status}}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <br>
-</div>
-<div class="card">
-    <div class="card-body">
-        <div class="card-text">
-            <div class="row">
-                <div class="col-2">
-                    <label for="item" class="form-label">Item</label>
-                    {{orderLineForm.item}}
-                </div>
-                <div class="col-2">
-                    <label for="item" class="form-label">Unit Price</label>
-                    <input type="text" class="omr form-control" value="0">
-                </div>
-                <div class="col-2">
-                    <label for="qty" class="form-label">Quantity</label>
-                    {{orderLineForm.qty}}
-                </div>
-                <div class="col-2">
-                    <label for="disc" class="form-label">Discount</label>
-                    {{orderLineForm.disc}}
-                </div>
-                <div class="col-2">
-                    <label for="disc" class="form-label">Total</label>
-                    {{orderLineForm.total_price}}
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-10"></div>
-                <div class="col-2" style="text-align: right;">
-                    <label for="total" class="form-label">Total</label>
-                    {{orderForm.total}}
-                </div>
-                <div class="col-12"> <br></div>
-                {% if status == 'new' %}
-                    <div class="col-12" style="text-align: center;">
-                        <input type="submit" name="update" class="btn btn-success" value="Add" form="order">
-                    </div>
-                {% else %}
-                    <div class="col-6">
-                        <input type="submit" name="update" class="btn btn-success" value="Update" form="orderLine">
-                    </div>
-                    <div class="col-6">
-                        <input type="submit" name="delete" class="btn btn-danger" value="Delete" form="orderLine">
-                    </div>
-                {% endif %}
-            </div>
-        </div>
+    <div class="row">
+        <br>
     </div>
-                
-</div>
-
+    <div class="card">
+        <div class="card-body">
+            <div class="card-text">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Unit Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                    </thead>
+                    {{ orderLineForm.management_form }}
+                    <tbody>
+                        {% for orderLine in orderLineForm %}
+                            <tr class="orderline">
+                                <th>{{orderLine.item}}</th>
+                                <td>0</td>
+                                <td>{{orderLine.qty}}</td>
+                                <td class="omr" id="disc">{{orderLine.disc}}</td>
+                                <td class="omr" id="total">{{orderLine.total_price}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-10"></div>
+                    <div class="col-2" style="text-align: right;">
+                        <label for="total" class="form-label">Total</label>
+                        {{orderForm.total}}
+                    </div>
+                    <div class="col-12"> <br></div>
+                    {% if status == 'new' %}
+                        <div class="col-12" style="text-align: center;">
+                            <input type="submit" name="update" class="btn btn-success" value="Add" form="test">
+                        </div>
+                    {% else %}
+                        <div class="col-6">
+                            <input type="submit" name="update" class="btn btn-success" value="Update" form="orderLine">
+                        </div>
+                        <div class="col-6">
+                            <input type="submit" name="delete" class="btn btn-danger" value="Delete" form="orderLine">
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>            
+    </div>
+</form>
 
 {% endblock main_body %}
 
@@ -105,11 +104,17 @@
 {% block scripts %}
 <!-- Add Additional Scripts at the bottom for the page in this block -->
 <script src="{% static 'js/inventory.js' %}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="{% static 'js/django-dynamic-formset/src/jquery.formset.js' %}"></script>
 <script>
     n = document.getElementsByClassName('omr');
     for(let i=0;i<n.length;i++){
         n[i].value=parseFloat(n[i].value).toFixed(3);
     }
 
+    $('.orderline').formset({
+        addText: 'Add Item',
+        deleteText: 'Remove'
+    });
 </script>
 {% endblock scripts %}
