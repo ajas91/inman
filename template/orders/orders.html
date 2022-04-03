@@ -39,7 +39,7 @@
     
     <div class="row mb-2 mt-2" style="text-align: right;">
         <div class="col-10"></div>
-        <div class="col-2"><a class="btn btn-success" href={% url "new_order" %}>New Order</a></div>
+        <div class="col-2"><a class="btn btn-success" href="{% url 'new_order' %}">New Order</a></div>
     </div>
     
     <div class="row mb-2">
@@ -62,7 +62,7 @@
                     <td>{{order.customer.phone_number}}</td>
                     <td class="omr">{order.total}}</td>
                     <td>{{order.status}}</td>
-                    <td><a class="btn btn-primary btn-sm" href={% url "update_delete_order" order.id %}>Check</a></td>
+                    <td><a class="btn btn-primary btn-sm" href="{% url 'update_delete_order' order.id %}">Check</a></td>
                 </tr>
             {% endfor %}
             </tbody>

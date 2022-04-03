@@ -11,7 +11,6 @@ class OrderForm(ModelForm):
 		super(OrderForm,self).__init__(*args,**kwargs)
 
 		self.fields['order_date'].widget = DateTimeInput(
-			format = '%d/%m/%Y %H:%M',
 			attrs={
 				'class':'form-control',
 				'id':'order_date',

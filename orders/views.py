@@ -1,5 +1,3 @@
-import re
-from sys import prefix
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import OrderForm, OrderLineForm
@@ -22,8 +20,6 @@ def newOrder(request):
     orderLineForm = formset_factory(OrderLineForm)
     itemsList = list(Item.objects.values())
     if request.method == 'POST':
-        # print(request.POST)
-        # orderForm = OrderForm(request.POST,prefix='initial')
         orderDate = request.POST['order_date']
         orderCustomer = request.POST['customer']
         orderStatus = request.POST['status']
@@ -60,8 +56,11 @@ def newOrder(request):
 
 
 def updateDeleteOrder(request,pk):
+    itemsList = list(Item.objects.values())
     order = Order.objects.get(id=pk)
     orderForm = OrderForm(instance=order)
+    orderLines = OrderLine.objects.filter(order=order)
+    # orderLineForm = formset_factory(OrderLineForm,queryset=orderLines)
     if request.method == 'POST':
         orderForm = OrderForm(request.POST,instance=order)
         if orderForm.is_valid() and request.POST.get('update'):
@@ -72,6 +71,7 @@ def updateDeleteOrder(request,pk):
     
     context = {'orderForm':orderForm,
                'order':order,
-               'status':'existing'
+               'status':'existing',
+               'itemsList':itemsList,
               }
     return render(request,'orders/orderDetail.html',context=context)
