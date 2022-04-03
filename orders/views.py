@@ -46,12 +46,6 @@ def newOrder(request):
                                   order=order
                                 )
             orderLine.save()
-
-        print(f'$$$$$$$$$ order ID:{order.id}')
-        print(f'######\n form \n {request.POST}')
-        # if orderForm.is_valid() and orderLineForm.is_valid():
-        #     orderForm.save()
-        #     orderLineForm.save()
         return redirect('orders')
 
     context = { 'orderForm':orderForm,

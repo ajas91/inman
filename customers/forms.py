@@ -27,4 +27,4 @@ class CustomerForm(ModelForm):
 		
 		self.fields['number_of_orders'].widget.attrs['class'] = 'form-control'
 		self.fields['number_of_orders'].widget.attrs['id'] = 'number_of_ rders'
-		
+		self.fields['number_of_orders'].widget.attrs['readonly'] = True 
