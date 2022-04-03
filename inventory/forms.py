@@ -10,6 +10,7 @@ class ItemForm(ModelForm):
 	def __init__(self,*args,**kwargs):
 		super(ItemForm,self).__init__(*args,**kwargs)
 
+		self.fields['item_image'].required = False
 		self.fields['item_name'].widget=TextInput(attrs = {
 								'class':'form-control',
 								'id': 'item_name',
@@ -27,6 +28,7 @@ class ItemForm(ModelForm):
 
 		self.fields['remaining_qty'].widget.attrs['class'] = 'form-control'
 		self.fields['remaining_qty'].widget.attrs['id'] = 'remaining_qty'
+		self.fields['remaining_qty'].widget.attrs['readonly'] = True
 		# self.fields['remaining_qty'].disabled = True
 
 		self.fields['item_category'].widget.attrs['class'] = 'form-select'

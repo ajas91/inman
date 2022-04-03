@@ -72,7 +72,7 @@
             {% for item in inventory %}
                 <tr>
                     <th scope="row">{{item.id}}</th>
-                    <td><img src = "{{ item.item_image.url }}" width="100" height="100"></td>
+                    <td>{% if item.item_image %}<img src = "{{ item.item_image.url }}" width="100" height="100"> {% endif %}</td>
                     <td>{{item.item_name}}</td>
                     <td class="omr">{{item.getTotalCost}}</td>
                     <td class="omr">{{item.selling_price}}</td>

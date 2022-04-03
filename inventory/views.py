@@ -43,7 +43,8 @@ def updateDeleteItem(request,pk):
             form.save()
         elif request.POST.get('delete'):
             item.delete()
-            os.remove(str(item.item_image))
+            if item.item_image:
+                os.remove(str(item.item_image))
         return redirect('inventory')
     
     context = {'form':form,

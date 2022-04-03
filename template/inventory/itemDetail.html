@@ -18,82 +18,82 @@
     <div class="col-2"><a class="btn btn-success" href={% url "new_category" %}>New Category</a></div>
 </div>
 <div class="card">
-    <div class="card-header" style="text-align: center;"><h1> Item Details </h1></div>
+    <div class="card-header" style="text-align: center;">
+        <h1> Item Details </h1>
+    </div>
     <div class="card-body">
-        <div class="card-text">
-            <form class="row g-3" method="POST" action="" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="col-md-12" style="text-align: center;">
-                    {% if img == 'new' %}
-                            <label for="image" class="form-label">Item Image</label>
-                            {{form.item_image}}
-                    {% else %}
-                        <img src = "{{ item.item_image.url }}" width="200" height="200">
-                    {% endif %}
-                </div>
-                <div class="col-md-6">
-                    <label for="id" class="form-label">Item Code</label>
-                    <input type="text" class="form-control" id="id" value="{{item.id}}" readonly>
-                </div>
-                <div class="col-6">
-                    <label for="item_name" class="form-label">Item Name</label>
-                    {{form.item_name}}
-                </div>
-                <div class="col-6">
-                    <label for="item_desc" class="form-label">Item Description</label>
-                    {{form.desc}}
-                </div>
-                <div class="col-6">
-                    <label for="item_category" class="form-label">Item Category</label>
-                    {{form.item_category}}
-                </div>
-                <div class="col-3">
-                    <label for="purchase_price" class="form-label">Purchase Price (SAR)</label>
-                    {{form.purchase_price}}
-                </div>
-                <div class="col-3">
-                    <label for="vat" class="form-label">VAT</label>
-                    {{form.vat}}
-                </div>
-                <div class="col-3">
-                    <label for="shipping_cost" class="form-label">Shipping Cost</label>
-                    {{form.shipping_cost}}
-                </div>
-                <div class="col-3">
-                    <label for="other_cost" class="form-label">Other Cost</label>
-                    {{form.other_cost}}
-                </div>
-                <div class="col-6">
-                    <label for="profit_margin" class="form-label">Profit Margin (in Percentage %)</label>
-                    {{form.profit_margin}}
-                </div>
-                <div class="col-md-6">
-                    <label for="selling_price" class="form-label">Selling Price</label>
-                    {{form.selling_price}}
-                </div>
-                <div class="col-6">
-                    <label for="ordered_qty" class="form-label">Ordered Quantity</label>
-                    {{form.ordered_qty}}
-                </div>
-                <div class="col-6">
-                    <label for="remaining_qty" class="form-label">Remaining Quantity</label>
-                    {{form.remaining_qty}}
-                </div>
-                
+        <form class="row g-3" method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-12" style="text-align: center;">
                 {% if img == 'new' %}
-                    <div class="col-6">
-                        <input type="submit" name="update" class="btn btn-success" value="Add">
-                    </div>
-                {% else %}
-                    <div class="col-6">
-                        <input type="submit" name="update" class="btn btn-success" value="Update">
-                    </div>
-                    <div class="col-6">
-                        <input type="submit" name="delete" class="btn btn-danger" value="Delete">
-                    </div>
+                        <label for="image" class="form-label">Item Image</label>
+                        {{form.item_image}}
+                {% elif item.item_image %}
+                    <img src = "{{ item.item_image.url }}" width="200" height="200">
                 {% endif %}
-            </form>
-        </div>
+            </div>
+            <div class="col-6">
+                <label for="id" class="form-label">Item Code</label>
+                <input type="text" class="form-control" id="id" value="{{item.id}}" readonly>
+            </div>
+            <div class="col-6">
+                <label for="item_name" class="form-label">Item Name</label>
+                {{form.item_name}}
+            </div>
+            <div class="col-6">
+                <label for="item_desc" class="form-label">Item Description</label>
+                {{form.desc}}
+            </div>
+            <div class="col-6">
+                <label for="item_category" class="form-label">Item Category</label>
+                {{form.item_category}}
+            </div>
+            <div class="col-3">
+                <label for="purchase_price" class="form-label">Purchase Price (SAR)</label>
+                {{form.purchase_price}}
+            </div>
+            <div class="col-3">
+                <label for="vat" class="form-label">VAT</label>
+                {{form.vat}}
+            </div>
+            <div class="col-3">
+                <label for="shipping_cost" class="form-label">Shipping Cost</label>
+                {{form.shipping_cost}}
+            </div>
+            <div class="col-3">
+                <label for="other_cost" class="form-label">Other Cost</label>
+                {{form.other_cost}}
+            </div>
+            <div class="col-6">
+                <label for="profit_margin" class="form-label">Profit Margin (in Percentage %)</label>
+                {{form.profit_margin}}
+            </div>
+            <div class="col-md-6">
+                <label for="selling_price" class="form-label">Selling Price</label>
+                {{form.selling_price}}
+            </div>
+            <div class="col-6">
+                <label for="ordered_qty" class="form-label">Ordered Quantity</label>
+                {{form.ordered_qty}}
+            </div>
+            <div class="col-6">
+                <label for="remaining_qty" class="form-label">Remaining Quantity</label>
+                {{form.remaining_qty}}
+            </div>
+            
+            {% if img == 'new' %}
+                <div class="col-6">
+                    <input type="submit" name="update" class="btn btn-success" value="Add">
+                </div>
+            {% else %}
+                <div class="col-6">
+                    <input type="submit" name="update" class="btn btn-success" value="Update">
+                </div>
+                <div class="col-6">
+                    <input type="submit" name="delete" class="btn btn-danger" value="Delete">
+                </div>
+            {% endif %}
+        </form>
     </div>
 </div>
 
