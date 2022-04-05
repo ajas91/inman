@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import OrderForm, OrderLineForm
-from django.forms.formsets import formset_factory
+from django.forms.models import modelformset_factory
+from django.forms import formset_factory
 
 # Create your views here.
 def orders(request):
@@ -17,7 +18,7 @@ def orders(request):
 
 def newOrder(request):
     orderForm = OrderForm()
-    orderLineForm = formset_factory(OrderLineForm)
+    orderLineFormset = formset_factory(OrderLineForm)
     itemsList = list(Item.objects.values())
     if request.method == 'POST':
         orderDate = request.POST['order_date']
@@ -45,7 +46,7 @@ def newOrder(request):
         return redirect('orders')
 
     context = { 'orderForm':orderForm,
-                'orderLineForm':orderLineForm,
+                'orderLineForm':orderLineFormset,
                 'status':'new',
                 'itemsList':itemsList,
               }
@@ -60,18 +61,25 @@ def updateDeleteOrder(request,pk):
     order = Order.objects.get(id=pk)
     orderForm = OrderForm(instance=order)
     orderLines = OrderLine.objects.filter(order=order)
-    # orderLineForm = formset_factory(OrderLineForm,queryset=orderLines)
+    orderLineFormset = modelformset_factory(OrderLine, form=OrderLineForm,extra=0)
+    formset = orderLineFormset(queryset=orderLines)
+
     if request.method == 'POST':
         orderForm = OrderForm(request.POST,instance=order)
-        if orderForm.is_valid() and request.POST.get('update'):
+        formset = orderLineFormset(request.POST,queryset=orderLines)
+        if orderForm.is_valid() and formset.is_valid() and request.POST.get('update'):
             orderForm.save()
+            formset.save()
         elif request.POST.get('delete'):
             order.delete()
-        return redirect('customers')
+            for orderLine in orderLines:
+                orderLine.delete()
+        return redirect('orders')
     
     context = {'orderForm':orderForm,
                'order':order,
                'status':'existing',
                'itemsList':itemsList,
+               'orderLineForm':formset,
               }
     return render(request,'orders/orderDetail.html',context=context)

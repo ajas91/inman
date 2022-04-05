@@ -16,7 +16,7 @@
     </div>
     <div class="col-9"></div>
 </div>
-<form method="POST" action="" enctype="multipart/form-data" id= "test">
+<form method="POST" action="" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="card">
         <div class="card-header" style="text-align: center;"><h1> Order Details </h1></div>
@@ -59,7 +59,6 @@
                         <th scope="col">Total</th>
                     </tr>
                     </thead>
-                    {{ orderLineForm.management_form }}
                     <tbody>
                         {% for orderLine in orderLineForm %}
                             <tr class="orderline">
@@ -81,14 +80,14 @@
                     <div class="col-12"> <br></div>
                     {% if status == 'new' %}
                         <div class="col-12" style="text-align: center;">
-                            <input type="submit" name="update" class="btn btn-success" value="Add" form="test">
+                            <input type="submit" name="update" class="btn btn-success" value="Add">
                         </div>
                     {% else %}
                         <div class="col-6">
-                            <input type="submit" name="update" class="btn btn-success" value="Update" form="orderLine">
+                            <input type="submit" name="update" class="btn btn-success" value="Update">
                         </div>
                         <div class="col-6">
-                            <input type="submit" name="delete" class="btn btn-danger" value="Delete" form="orderLine">
+                            <input type="submit" name="delete" class="btn btn-danger" value="Delete">
                         </div>
                     {% endif %}
                 </div>
