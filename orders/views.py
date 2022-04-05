@@ -21,28 +21,29 @@ def newOrder(request):
     orderLineFormset = formset_factory(OrderLineForm)
     itemsList = list(Item.objects.values())
     if request.method == 'POST':
-        orderDate = request.POST['order_date']
-        orderCustomer = request.POST['customer']
-        orderStatus = request.POST['status']
-        orderTotal = request.POST['total']
-        order = Order(order_date = orderDate, 
-                      customer = Customer.objects.get(id=int(orderCustomer)),
-                      status = orderStatus,
-                      total = orderTotal)
-        order.save()
-
-        for i in range(int(request.POST['form-TOTAL_FORMS'][0])):
-            item = request.POST[f'form-{i}-item']
-            qty = request.POST[f'form-{i}-qty']
-            disc = request.POST[f'form-{i}-disc']
-            total_price = request.POST[f'form-{i}-total_price']
-            orderLine = OrderLine(item=Item.objects.get(id=int(item)),
-                                  qty=qty,
-                                  disc=disc,
-                                  total_price=total_price,
-                                  order=order
-                                )
-            orderLine.save()
+        print(request.POST)
+        if orderForm.is_valid() and orderLineFormset.is_valid():
+            orderDate = request.POST['order_date']
+            orderCustomer = request.POST['customer']
+            orderStatus = request.POST['status']
+            orderTotal = request.POST['total']
+            order = Order(order_date = orderDate, 
+                        customer = Customer.objects.get(id=int(orderCustomer)),
+                        status = orderStatus,
+                        total = orderTotal)
+            order.save()
+            for i in range(int(request.POST['form-TOTAL_FORMS'][0])):
+                item = request.POST[f'form-{i}-item']
+                qty = request.POST[f'form-{i}-qty']
+                disc = request.POST[f'form-{i}-disc']
+                total_price = request.POST[f'form-{i}-total_price']
+                orderLine = OrderLine(item=Item.objects.get(id=int(item)),
+                                    qty=qty,
+                                    disc=disc,
+                                    total_price=total_price,
+                                    order=order
+                                    )
+                orderLine.save()
         return redirect('orders')
 
     context = { 'orderForm':orderForm,
