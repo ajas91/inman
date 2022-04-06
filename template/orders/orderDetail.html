@@ -60,6 +60,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                        {{ orderLineForm.management_form }}
                         {% for orderLine in orderLineForm %}
                             <tr class="orderline">
                                 <th>{{orderLine.item}}</th>
