@@ -3,10 +3,10 @@ n = document.getElementsByClassName('omr');
         n[i].value=parseFloat(n[i].value).toFixed(3);
     }
 
-$('.orderline').formset({
-        addText: 'Add Item',
-        deleteText: 'Remove'
-});
+// $('.orderline').formset({
+//         addText: 'Add Item',
+//         deleteText: 'Remove'
+// });
 
 total = document.getElementById('total_price')
 

@@ -8,8 +8,9 @@
  *
  * Licensed under the New BSD License
  * See: http://www.opensource.org/licenses/bsd-license.php
+ * https://github.com/elo80ka/django-dynamic-formset/blob/master/docs/usage.rst
  */
-;(function($) {
+ ;(function($) {
     $.fn.formset = function(opts)
     {
         var options = $.extend({}, $.fn.formset.defaults, opts),
