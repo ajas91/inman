@@ -59,6 +59,7 @@
                         <th scope="col">Quantity</th>
                         <th scope="col">Discount</th>
                         <th scope="col">Total</th>
+                        <th></th>
                     </tr>
                     </thead>
                     {% for orderLine in formset %}
@@ -72,6 +73,7 @@
                                 <td>{{orderLine.qty}}</td>
                                 <td class="omr" id="discount">{{orderLine.disc}}</td>
                                 <td class="omr" id="total_price_">{{orderLine.total_price}}</td>
+                                <td></td>
                             </tr>
                         </tbody>
                     {% endfor %}
@@ -105,9 +107,11 @@
 <script type="text/javascript">
     $(function() {
         $('#myForm tbody tr').formset({
-            addText: 'Add Item',
-            deleteText: 'Remove',
-            prefix: '{{ formset.prefix }}'
+            addText: '+',
+            deleteText: '-',
+            prefix: '{{ formset.prefix }}',
+            deleteCssClass: "btn btn-outline-danger",
+            addCssClass: "btn btn-outline-success",
         });
     })
 </script>
