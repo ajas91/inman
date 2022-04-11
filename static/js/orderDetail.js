@@ -47,6 +47,9 @@ function getUnitPrice(){
     disc = document.getElementsByClassName('discount');
     total = document.getElementsByClassName('total_price_');
     for (let i=0;i<totalForms.value;i++){
+        qty[i].value=1;
+        disc[i].value=0;
+        total[i].value=0;
         selectedItem = document.getElementsByName('orderline-'+i+'-item')[0];
         selectedItem.addEventListener('change',function(){
             filters = [item => item.id == parseInt(selectedItem.value),];
