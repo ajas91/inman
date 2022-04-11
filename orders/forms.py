@@ -42,11 +42,11 @@ class OrderLineForm(ModelForm):
 		self.fields['item'].widget.attrs['class'] = 'form-select'
 		self.fields['item'].widget.attrs['id'] = 'item'
 
-		self.fields['qty'].widget.attrs['class'] = 'form-control'
+		self.fields['qty'].widget.attrs['class'] = 'form-control quantity'
 		self.fields['qty'].widget.attrs['id'] = 'qty'
 
-		self.fields['disc'].widget.attrs['class'] = 'form-control omr'
+		self.fields['disc'].widget.attrs['class'] = 'form-control omr discount'
 		self.fields['disc'].widget.attrs['id'] = 'disc'
 
-		self.fields['total_price'].widget.attrs['class'] = 'form-control omr'
+		self.fields['total_price'].widget.attrs['class'] = 'form-control omr total_price_'
 		self.fields['total_price'].widget.attrs['id'] = 'total_price'

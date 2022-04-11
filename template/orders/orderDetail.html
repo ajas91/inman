@@ -66,10 +66,10 @@
                         {% for hidden in form.hidden_fields %}
                             {{ hidden }}
                         {% endfor %}
-                        <tbody>
+                        <tbody id="orders">
                             <tr class="orderline">
                                 <th>{{orderLine.item}}</th>
-                                <td><input type="text" value="0.00" id="unit_price" class="form-control" readonly></td>
+                                <td><input type="text" value="0.00" id="unit_price" class="form-control unit_price" readonly></td>
                                 <td>{{orderLine.qty}}</td>
                                 <td class="omr" id="discount">{{orderLine.disc}}</td>
                                 <td class="omr" id="total_price_">{{orderLine.total_price}}</td>
@@ -111,7 +111,7 @@
             deleteText: '-',
             prefix: '{{ formset.prefix }}',
             deleteCssClass: "btn btn-outline-danger",
-            addCssClass: "btn btn-outline-success",
+            addCssClass: "btn btn-outline-success add-btn",
         });
     })
 </script>
