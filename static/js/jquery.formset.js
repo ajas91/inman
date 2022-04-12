@@ -10,6 +10,20 @@
  * See: http://www.opensource.org/licenses/bsd-license.php
  * https://github.com/elo80ka/django-dynamic-formset/blob/master/docs/usage.rst
  */
+// function setDefaultVal(){
+//     totalForms = document.getElementsByName('orderline-TOTAL_FORMS')[0];
+//     qty = document.getElementsByClassName('quantity');
+//     disc = document.getElementsByClassName('discount');
+//     total = document.getElementsByClassName('total_price_');
+//     for (let i=0;i<totalForms.value;i++){
+//         if (isNaN(total[i])){
+//             qty[i]=1;
+//             disc[i]=0;
+//             total[i]=0;
+//         };
+//     }
+// };
+
  ;(function($) {
     $.fn.formset = function(opts)
     {
@@ -183,7 +197,7 @@
             // FIXME: Perhaps using $.data would be a better idea?
             options.formTemplate = template;
 
-            var addButtonHTML = '<a class="' + options.addCssClass + '" href="javascript:void(0)">' + options.addText + '</a>';
+            var addButtonHTML = '<a class="' + options.addCssClass + '" href="javascript:void(0)" >' + options.addText + '</a>';
             if (options.addContainerClass) {
                 // If we have a specific container for the "add" button,
                 // place it as the last child of that container:

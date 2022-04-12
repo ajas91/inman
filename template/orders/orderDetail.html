@@ -62,11 +62,11 @@
                         <th></th>
                     </tr>
                     </thead>
-                    {% for orderLine in formset %}
-                        {% for hidden in form.hidden_fields %}
-                            {{ hidden }}
-                        {% endfor %}
-                        <tbody id="orders">
+                    <tbody id="orders">
+                        {% for orderLine in formset %}
+                            {% for hidden in form.hidden_fields %}
+                                {{ hidden }}
+                            {% endfor %}
                             <tr class="orderline">
                                 <th>{{orderLine.item}}</th>
                                 <td><input type="text" value="0.00" id="unit_price" class="form-control unit_price" readonly></td>
@@ -75,8 +75,8 @@
                                 <td class="omr" id="total_price_">{{orderLine.total_price}}</td>
                                 <td></td>
                             </tr>
-                        </tbody>
-                    {% endfor %}
+                        {% endfor %}
+                    </tbody>
                 </table>
                 {{formset.management_form}}
                 <div class="row">
