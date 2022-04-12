@@ -44,13 +44,9 @@ class OrderLineForm(ModelForm):
 
 		self.fields['qty'].widget.attrs['class'] = 'form-control quantity'
 		self.fields['qty'].widget.attrs['id'] = 'qty'
-		self.fields['qty'].initial = 1
 
 		self.fields['disc'].widget.attrs['class'] = 'form-control omr discount'
 		self.fields['disc'].widget.attrs['id'] = 'disc'
-		self.fields['disc'].initial = 0
-
 
 		self.fields['total_price'].widget.attrs['class'] = 'form-control omr total_price_'
 		self.fields['total_price'].widget.attrs['id'] = 'total_price'
-		self.fields['total_price'].initial = 0

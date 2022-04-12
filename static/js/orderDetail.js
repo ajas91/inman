@@ -34,22 +34,28 @@ function getUnitPrice(){
     calTotalBill(total);
 }
 
+function setDefaultVal(){
+    totalForms = document.getElementsByName('orderline-TOTAL_FORMS')[0];
+    qty = document.getElementsByClassName('quantity');
+    disc = document.getElementsByClassName('discount');
+    total = document.getElementsByClassName('total_price_');
+    for (let i=0;i<totalForms.value;i++){
+        if (total[i].value = ''){
+            qty[i].value=1;
+            disc[i].value=0.000;
+            total[i].value=0.000;
+        };
+    }
+}
+
 
 orderline = document.getElementById('orders')
 orderline.addEventListener('click',function(e){
-    getUnitPrice();
+    
+    if (e.target && e.target.id == 'add-btn'){
+        // setDefaultVal();
+        console.log('im here');
+    } else {
+        getUnitPrice();
+    };
 })
-
-
-// function setDefaultVal(){
-//     qty = document.getElementsByClassName('quantity');
-//     disc = document.getElementsByClassName('discount');
-//     total = document.getElementsByClassName('total_price_');
-//     for (let i=0;i<totalForms.value;i++){
-//         if (isNaN(total[i])){
-//             qty[i]=1;
-//             disc[i]=0;
-//             total[i]=0;
-//         };
-//     }
-// }
