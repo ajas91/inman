@@ -22,7 +22,7 @@
                     <input type="text" class="form-control" id="order_number">
                 </div>
                 <div class="col-sm">
-                    <label for="phone_number" class="form-label">Customer Phone Number</label>
+                    <label for="phone_number" class="form-label">Phone Number</label>
                     <input type="text" class="form-control" id="phone_number">
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     <th scope="row">{{order.id}}</th>
                     <td>{{order.customer.name}}</td>
                     <td>{{order.customer.phone_number}}</td>
-                    <td class="omr">{order.total}}</td>
+                    <td class="omr">{{order.total}}</td>
                     <td>{{order.status}}</td>
                     <td><a class="btn btn-primary btn-sm" href="{% url 'update_delete_order' order.id %}">Check</a></td>
                 </tr>
