@@ -40,7 +40,7 @@ function setDefaultVal(){
     disc = document.getElementsByClassName('discount');
     total = document.getElementsByClassName('total_price_');
     for (let i=0;i<totalForms.value;i++){
-        if (total[i].value = ''){
+        if (total[i].value == ''){
             qty[i].value=1;
             disc[i].value=0.000;
             total[i].value=0.000;
@@ -51,11 +51,8 @@ function setDefaultVal(){
 
 orderline = document.getElementById('orders')
 orderline.addEventListener('click',function(e){
-    
-    if (e.target && e.target.id == 'add-btn'){
-        // setDefaultVal();
-        console.log('im here');
-    } else {
-        getUnitPrice();
+    if (e.target.nodeName == 'SELECT') {
+        setDefaultVal();
     };
+    getUnitPrice();
 })
