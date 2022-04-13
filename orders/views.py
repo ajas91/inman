@@ -47,12 +47,12 @@ def updateDeleteOrder(request,pk):
     order = Order.objects.get(id=pk)
     orderForm = OrderForm(instance=order)
     orderLines = OrderLine.objects.filter(order=order)
-    orderLineFormset = modelformset_factory(OrderLine, form=OrderLineForm,extra=0)
-    formset = orderLineFormset(queryset=orderLines,prefix='orderline')
+    orderLineFormset = inlineformset_factory(Order,OrderLine,OrderLineForm,can_delete=True,extra=0,max_num=10)
+    formset = orderLineFormset(instance=order,queryset=orderLines,prefix='orderline')
 
     if request.method == 'POST':
         orderForm = OrderForm(request.POST,instance=order)
-        formset = orderLineFormset(request.POST,queryset=orderLines,prefix='orderline')
+        formset = orderLineFormset(request.POST,instance=order, queryset=orderLines,prefix='orderline')
         if orderForm.is_valid() and formset.is_valid() and request.POST.get('update'):
             orderForm.save()
             formset.save()
@@ -66,6 +66,8 @@ def updateDeleteOrder(request,pk):
                'order':order,
                'status':'existing',
                'itemsList':itemsList,
+            #    'formset':zip([*range(len(orderLines))],formset),
                'formset':formset,
+               'orderLines':orderLines,
               }
     return render(request,'orders/orderDetail.html',context=context)
