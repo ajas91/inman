@@ -66,7 +66,6 @@ def updateDeleteOrder(request,pk):
                'order':order,
                'status':'existing',
                'itemsList':itemsList,
-            #    'formset':zip([*range(len(orderLines))],formset),
                'formset':formset,
                'orderLines':orderLines,
               }
