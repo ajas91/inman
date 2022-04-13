@@ -3,8 +3,10 @@ from .models import *
 from .forms import CustomerForm
 from inventory.models import *
 from orders.models import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def index(request):
 
     totalCustomers = Customer.objects.all().count()
@@ -27,7 +29,8 @@ def index(request):
 
 
 
-    
+
+@login_required(login_url='/accounts/login/')
 def customers(request):
     customers = Customer.objects.all()
     context = {'customers':customers,
@@ -39,6 +42,7 @@ def customers(request):
 
 
 
+@login_required(login_url='/accounts/login/')
 def newCustomer(request):
     form = CustomerForm()
     if request.method == 'POST':
@@ -56,6 +60,7 @@ def newCustomer(request):
 
 
 
+@login_required(login_url='/accounts/login/')
 def updateDeleteCustomer(request,pk):
     customer = Customer.objects.get(id=pk)
     form = CustomerForm(instance=customer)

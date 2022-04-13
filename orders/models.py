@@ -4,10 +4,17 @@ from inventory.models import Item
 from datetime import datetime
 
 # Create your models here.
+class DateTimeWithoutTZField(models.DateTimeField):
+    def db_type(self, connection):
+        return 'timestamp'
+
+
+
+
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
     customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
-    order_date = models.DateTimeField(default=datetime.now, blank=True)
+    order_date = DateTimeWithoutTZField(default=datetime.now, blank=True)
     total = models.FloatField(default=0.0)
     statusChoice = [('New','New'),
                     ('Pending Payment','Pending Payment'),

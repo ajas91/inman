@@ -19,9 +19,12 @@ import orders.urls
 import customers.urls
 import customers.views
 import inventory.urls
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/login/', auth_views.LoginView.as_view()),
+    path('accounts/logout/', auth_views.LogoutView.as_view(),name='logout'),
     re_path('^$',customers.views.index,name='index'),
     path('',include(customers.urls), name='customers'),
     path('',include(inventory.urls), name='inventory'),

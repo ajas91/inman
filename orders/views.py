@@ -3,8 +3,10 @@ from .models import *
 from .forms import OrderForm, OrderLineForm
 from django.forms.models import modelformset_factory, inlineformset_factory
 from django.forms import formset_factory
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def orders(request):
     orders = Order.objects.all()
     context = {'orders':orders,
@@ -15,13 +17,14 @@ def orders(request):
 
 
 
-
+@login_required(login_url='/accounts/login/')
 def newOrder(request):
     orderForm = OrderForm()
     orderLineFormset = inlineformset_factory(Order,OrderLine,OrderLineForm,can_delete=True,extra=1,max_num=10)
     formset = orderLineFormset(prefix='orderline')
     itemsList = list(Item.objects.values())
     if request.method == 'POST':
+        print(request.POST)
         orderForm = OrderForm(request.POST)
         if orderForm.is_valid():
             order = orderForm.save(commit=False)
@@ -42,6 +45,7 @@ def newOrder(request):
 
 
 
+@login_required(login_url='/accounts/login/')
 def updateDeleteOrder(request,pk):
     itemsList = list(Item.objects.values())
     order = Order.objects.get(id=pk)

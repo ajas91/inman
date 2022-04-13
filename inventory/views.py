@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import ItemForm, CategoryForm
 import os
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def inventory(request):
     inventory = Item.objects.all()
     categories = ItemCategory.objects.all()
@@ -16,6 +18,7 @@ def inventory(request):
 
 
 
+@login_required(login_url='/accounts/login/')
 def newItem(request):
     img = 'new'
     form = ItemForm()
@@ -33,6 +36,7 @@ def newItem(request):
 
 
 
+@login_required(login_url='/accounts/login/')
 def updateDeleteItem(request,pk):
     img = 'existing'
     item = Item.objects.get(id=pk)
@@ -56,6 +60,7 @@ def updateDeleteItem(request,pk):
 
 
 
+@login_required(login_url='/accounts/login/')
 def newCategory(request):
     form = CategoryForm()
     if request.method == 'POST':
