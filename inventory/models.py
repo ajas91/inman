@@ -32,3 +32,6 @@ class Item(models.Model):
 
     def getTotalCost(self):
         return self.purchase_price*0.1+self.vat+self.shipping_cost+self.other_cost
+
+    def updateRemaining(self,qty):
+        self.remaining_qty -= qty

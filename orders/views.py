@@ -46,7 +46,11 @@ def newOrder(request):
             formset = orderLineFormset(request.POST,instance=order,prefix='orderline')
             if formset.is_valid():
                 order.save()
-                formset.save()
+                items= formset.save()
+                for item in items:
+                    item.item.updateRemaining(item.qty)
+                    item.item.save()
+                    
         return redirect('orders')
 
     context = { 'orderForm':orderForm,
