@@ -5,9 +5,28 @@ import os
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+def is_valid_queryparam(param):
+    return param != '' and param is not None
+
+
+
+
 @login_required(login_url='/accounts/login/')
 def inventory(request):
+    category = request.GET.get('selected_category')
+    item_code = request.GET.get('item_code')
+    price_less_than = request.GET.get('price_less_than')   
     inventory = Item.objects.all()
+
+    if is_valid_queryparam(category):
+        inventory = inventory.filter(item_category_category_name=category)
+
+    elif is_valid_queryparam(item_code):
+        inventory = inventory.filter(id=item_code)
+
+    elif is_valid_queryparam(price_less_than):
+        inventory = inventory.filter(selling_price__lte=price_less_than)
+
     categories = ItemCategory.objects.all()
     context = {'inventory':inventory,
                'categories':categories,

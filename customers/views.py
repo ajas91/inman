@@ -6,6 +6,12 @@ from orders.models import *
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+def is_valid_queryparam(param):
+    return param != '' and param is not None
+
+
+
+
 @login_required(login_url='/accounts/login/')
 def index(request):
 
@@ -32,7 +38,17 @@ def index(request):
 
 @login_required(login_url='/accounts/login/')
 def customers(request):
+    phone_number = request.GET.get('phone_number')
+    customer_name = request.GET.get('customer_name')
     customers = Customer.objects.all()
+
+    if is_valid_queryparam(phone_number):
+        customers = customers.filter(phone_number__contains=phone_number)
+
+    elif is_valid_queryparam(customer_name):
+        customers = customers.filter(name__icontains=customer_name)
+
+
     context = {'customers':customers,
               }
 

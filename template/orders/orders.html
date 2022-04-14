@@ -11,30 +11,31 @@
 {% block main_body %}
 <!-- Add the main body for the page in this block -->
 <div class="contrainer-fluid">
-    <div class="row filter-bar mb-3 mt-2">
-        <h5>Filter Bar</h5>
-        <div class="col-7">
-            <div class="row">
-                <div class="col-sm">   
-                </div>
-                <div class="col-sm">
-                    <label for="order_number" class="form-label">Order Number</label>
-                    <input type="text" class="form-control" id="order_number">
-                </div>
-                <div class="col-sm">
-                    <label for="phone_number" class="form-label">Phone Number</label>
-                    <input type="text" class="form-control" id="phone_number">
+    <form action="" method="get">
+        <div class="row filter-bar mb-3 mt-2">
+            <h5>Filter Bar</h5>
+            <div class="col-7">
+                <div class="row">
+                    <div class="col-4">   
+                    </div>
+                    <div class="col-4">
+                        <label for="order_number" class="form-label">Order Number</label>
+                        <input type="text" class="form-control" id="order_number" name="order_number">
+                    </div>
+                    <div class="col-4">
+                        <label for="phone_number" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-3">
+            <div class="col-3">
 
+            </div>
+            <div class="col-2" style="text-align: right;">
+                <input class="btn btn-outline-primary" type="submit" value="Apply" name="apply">
+            </div>
         </div>
-        <div class="col-2" style="text-align: right;">
-            <input class="btn btn-outline-primary" type="submit" value="Apply">
-        </div>
-    </div>
-
+    </form>
     <hr>
     
     <div class="row mb-2 mt-2" style="text-align: right;">

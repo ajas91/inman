@@ -15,7 +15,7 @@ class OrderForm(ModelForm):
 			attrs={
 				'class':'form-control',
 				'id':'order_date',
-		        # 'type': 'datetime-local',
+		        'type': 'datetime-local',
 			})
 		# self.fields['order_date'].widget.format = '%d-%m-%Y %H:%M:%S'
 		# self.fields['order_date'].widget.attrs['class'] = 'form-select'

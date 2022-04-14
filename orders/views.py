@@ -6,9 +6,24 @@ from django.forms import formset_factory
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+def is_valid_queryparam(param):
+    return param != '' and param is not None
+
+
+
+
 @login_required(login_url='/accounts/login/')
 def orders(request):
+    phone_number = request.GET.get('phone_number')
+    order_number = request.GET.get('order_number')
     orders = Order.objects.all()
+
+    if is_valid_queryparam(phone_number):
+        orders = orders.filter(customer__phone_number__contains=phone_number)
+
+    elif is_valid_queryparam(order_number):
+        orders = orders.filter(id=order_number)
+
     context = {'orders':orders,
               }
 
