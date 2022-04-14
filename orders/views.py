@@ -47,7 +47,6 @@ def newOrder(request):
             if formset.is_valid():
                 order.save()
                 order.customer.updateNumberOfOrders()
-                print(order.customer.number_of_orders)
                 order.customer.save()
                 items= formset.save()
                 for item in items:
