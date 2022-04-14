@@ -11,3 +11,7 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+    def updateNumberOfOrders(self):
+        self.number_of_orders +=1

@@ -46,6 +46,9 @@ def newOrder(request):
             formset = orderLineFormset(request.POST,instance=order,prefix='orderline')
             if formset.is_valid():
                 order.save()
+                order.customer.updateNumberOfOrders()
+                print(order.customer.number_of_orders)
+                order.customer.save()
                 items= formset.save()
                 for item in items:
                     item.item.updateRemaining(item.qty)
