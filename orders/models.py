@@ -1,7 +1,7 @@
 from django.db import models
 from customers.models import Customer
 from inventory.models import Item
-from datetime import datetime
+from datetime import datetime,date
 
 # Create your models here.
 class DateTimeWithoutTZField(models.DateTimeField):
@@ -14,7 +14,8 @@ class DateTimeWithoutTZField(models.DateTimeField):
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
     customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
-    order_date = DateTimeWithoutTZField(default=datetime.now, blank=True)
+    # order_date = DateTimeWithoutTZField(default=datetime.now, blank=True)
+    order_date = models.DateField(default=date.today(), blank=True)
     total = models.FloatField(default=0.0)
     statusChoice = [('New','New'),
                     ('Pending Payment','Pending Payment'),
