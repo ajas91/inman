@@ -23,7 +23,7 @@ class Order(models.Model):
                     ('Done','Done')
                    ]
     status = models.TextField(choices=statusChoice,default='New')
-
+    # created_by = models.ForeignKey('auth.User', related_name='inventory', on_delete=models.CASCADE)
     def __str__(self):
         return str(self.id)
 
