@@ -13,7 +13,7 @@ class DateTimeWithoutTZField(models.DateTimeField):
 
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
-    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer,on_delete=models.CASCADE,related_name='orders')
     # order_date = DateTimeWithoutTZField(default=datetime.now, blank=True)
     order_date = models.DateField(default=date.today(), blank=True)
     total = models.FloatField(default=0.0)
@@ -23,7 +23,7 @@ class Order(models.Model):
                     ('Done','Done')
                    ]
     status = models.TextField(choices=statusChoice,default='New')
-    # created_by = models.ForeignKey('auth.User', related_name='inventory', on_delete=models.CASCADE)
+    created_by = models.ForeignKey('auth.User', related_name='order_created_by', on_delete=models.CASCADE)
     def __str__(self):
         return str(self.id)
 
@@ -36,7 +36,7 @@ class OrderLine(models.Model):
     qty = models.IntegerField(default=1)
     disc = models.FloatField(default=0.0)
     total_price = models.FloatField(default=0.0)
-    order = models.ForeignKey(Order,on_delete=models.CASCADE)
+    order = models.ForeignKey(Order,on_delete=models.CASCADE,related_name='orderlines')
     
     def __str__(self):
         return self.item.item_name

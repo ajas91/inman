@@ -8,7 +8,7 @@ class Customer(models.Model):
     date_created = models.DateField(auto_now_add=True)
     address = models.TextField(default="")
     number_of_orders = models.IntegerField(default=0)
-    # created_by = models.ForeignKey('auth.User', related_name='customers', on_delete=models.CASCADE)
+    created_by = models.ForeignKey('auth.User', related_name='customer_created_by', on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
 
     def __str__(self):

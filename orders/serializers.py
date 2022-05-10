@@ -3,26 +3,22 @@ from .models import *
 from django.contrib.auth.models import User
 
 
-class OrderSerializer(serializers.HyperlinkedModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
     # created_by = serializers.ReadOnlyField(source='created_by.username')
-    customer = serializers.HyperlinkedRelatedField(many=True, view_name='customer-detail', read_only=True)
+    orderlines = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Order
         fields = ['id', 'customer','order_date','total',
-                  'status',
-                #   'created_by', 
+                  'status','orderlines','created_by', 
                  ]
 
 
 
 
-class OrderLineSerializer(serializers.HyperlinkedModelSerializer):
-    order = serializers.HyperlinkedRelatedField(many=True, view_name='order-detail', read_only=True)
-    item = serializers.HyperlinkedRelatedField(many=True, view_name='item-detail', read_only=True)
-
+class OrderLineSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Order
+        model = OrderLine
         fields = ['id', 'item','qty','disc',
                   'total_price','order',
                  ]

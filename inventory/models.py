@@ -19,14 +19,14 @@ class Item(models.Model):
     ordered_qty = models.IntegerField(default=0,null=True)
     remaining_qty = models.IntegerField(default=0,null=True)
     item_image = models.ImageField(null=True,upload_to='static/image/uploads/',blank=True)
-    item_category = models.ForeignKey(ItemCategory,on_delete=models.CASCADE)
+    item_category = models.ForeignKey(ItemCategory,on_delete=models.CASCADE,related_name='items')
     purchase_price = models.FloatField(default=0.0,null=True)
     vat = models.FloatField(default=0.0,null=True)
     shipping_cost = models.FloatField(default=0.0,null=True)
     other_cost = models.FloatField(default=0.0,null=True)
     profit_margin = models.FloatField(default=0.0,null=True)
     selling_price = models.FloatField(default=0.0,null=True)
-    # created_by = models.ForeignKey('auth.User', related_name='inventory', on_delete=models.CASCADE)
+    created_by = models.ForeignKey('auth.User', related_name='item_created_by', on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
