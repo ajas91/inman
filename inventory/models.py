@@ -26,6 +26,8 @@ class Item(models.Model):
     other_cost = models.FloatField(default=0.0,null=True)
     profit_margin = models.FloatField(default=0.0,null=True)
     selling_price = models.FloatField(default=0.0,null=True)
+    created_by = models.ForeignKey('auth.User', related_name='inventory', on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.item_name
