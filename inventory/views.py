@@ -16,8 +16,8 @@ class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(created_by=self.request.user)
 
 
 

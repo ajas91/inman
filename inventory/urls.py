@@ -10,5 +10,5 @@ router.register(r'items_category', views.ItemCategoryViewSet,basename="items_cat
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
 ]
