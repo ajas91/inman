@@ -15,13 +15,13 @@ class CustomersViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomersSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(created_by=self.request.user)
 
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This viewset automatically provides `list` and `retrieve` actions.
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+# class UserViewSet(viewsets.ReadOnlyModelViewSet):
+#     """
+#     This viewset automatically provides `list` and `retrieve` actions.
+#     """
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
