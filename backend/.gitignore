@@ -1,0 +1,8 @@
+env/
+.vscode/
+__pycache__/
+*.pyc
+*.DS_Store
+*/migrations
+*.sqlite3
+static/image/uploads

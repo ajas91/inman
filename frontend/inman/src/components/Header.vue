@@ -12,7 +12,7 @@
                     <router-link to="/inventory" class="nav-item nav-link">Inventory</router-link>
                     <router-link to="/orders" class="nav-item nav-link">Orders</router-link>
                     <router-link to="/customers" class="nav-item nav-link">Customers</router-link>
-                    <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</router-link>
+                    <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     <a href="#" class="nav-item nav-link">Logout</a>

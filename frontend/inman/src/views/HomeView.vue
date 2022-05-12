@@ -23,68 +23,69 @@
         />
       </div>
     </div>
-  </div>
-  <div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Pending Payment<span class="pending">(totalPendingPCount)</span></h4>
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Order ID</th>
-                            <th scope="col">Customer Name</th>
-                            <th scope="col">Order Value</th>
-                            <th scope="col">Details</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        for pending in totalPendingP
-                            <tr>
-                                <th scope="row">{{pending.id}}</th>
-                                <td>{{pending.customer.name}}</td>
-                                <td>{{pending.total}}</td>
-                                <td><a class="btn btn-primary btn-sm" href="{% url 'update_delete_order' pending.id %}">Check</a></td>
-                            </tr>
-                        endfor
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+  
+    <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm">
+              <div class="card">
+                  <div class="card-header">
+                      <h4>Pending Payment<span class="pending">(totalPendingPCount)</span></h4>
+                  </div>
+                  <div class="card-body">
+                      <table class="table">
+                          <thead>
+                          <tr>
+                              <th scope="col">Order ID</th>
+                              <th scope="col">Customer Name</th>
+                              <th scope="col">Order Value</th>
+                              <th scope="col">Details</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          for pending in totalPendingP
+                              <tr>
+                                  <th scope="row">pending.id</th>
+                                  <td>pending.customer.name</td>
+                                  <td>pending.total</td>
+                                  <td><a class="btn btn-primary btn-sm" href="#">Check</a></td>
+                              </tr>
+                          endfor
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
 
-        <div class="col-sm">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Pending Delivery <span class="pending">({{totalPendingDCount}})</span></h4>
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Order ID</th>
-                            <th scope="col">Customer Name</th>
-                            <th scope="col">Order Value</th>
-                            <th scope="col">Details</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for pending in totalPendingD %}
-                            <tr>
-                                <th scope="row">{{pending.id}}</th>
-                                <td>{{pending.customer.name}}</td>
-                                <td>{{pending.total}}</td>
-                                <td><a class="btn btn-primary btn-sm" href="{% url 'update_delete_order' pending.id %}">Check</a></td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+          <div class="col-sm">
+              <div class="card">
+                  <div class="card-header">
+                      <h4>Pending Delivery <span class="pending">(totalPendingDCount)</span></h4>
+                  </div>
+                  <div class="card-body">
+                      <table class="table">
+                          <thead>
+                          <tr>
+                              <th scope="col">Order ID</th>
+                              <th scope="col">Customer Name</th>
+                              <th scope="col">Order Value</th>
+                              <th scope="col">Details</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          for pending in totalPendingD
+                              <tr>
+                                  <th scope="row">pending.id</th>
+                                  <td>{{pending.customer.name}}</td>
+                                  <td>{{pending.total}}</td>
+                                  <td><a class="btn btn-primary btn-sm" href="#">Check</a></td>
+                              </tr>
+                          endfor
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
     </div>
   </div>
 </template>
