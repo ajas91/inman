@@ -75,8 +75,8 @@
                           for pending in totalPendingD
                               <tr>
                                   <th scope="row">pending.id</th>
-                                  <td>{{pending.customer.name}}</td>
-                                  <td>{{pending.total}}</td>
+                                  <td>pending.customer.name</td>
+                                  <td>pending.total</td>
                                   <td><a class="btn btn-primary btn-sm" href="#">Check</a></td>
                               </tr>
                           endfor

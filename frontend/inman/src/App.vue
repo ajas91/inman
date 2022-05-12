@@ -1,12 +1,9 @@
 <template>
-  <nav>
-    <div class="container">
-      <Header />
-      <router-view />
-      <Footer />
-    </div>
-  </nav>
-  
+  <div class="container">
+    <Header />
+    <router-view />
+    <Footer />
+  </div>
 </template>
 
 <script>
@@ -21,10 +18,13 @@ export default {
   },
   data() {
     return {}
-  },
+  }
 }
 
 </script>
+
+
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
