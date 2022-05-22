@@ -29,7 +29,7 @@
       
       <div class="row mb-2 mt-2" style="text-align: right;">
           <div class="col-9"></div>
-          <div class="col-2"><router-link class="btn btn-success" to="/customers/new_customer">New Customer</router-link></div>
+          <!-- <div class="col-2"><router-link class="btn btn-success" to="/customers/new_customer">New Customer</router-link></div> -->
       </div>
       
       <div class="row mb-2">
@@ -45,16 +45,14 @@
               </tr>
               </thead>
               <tbody>
-              for customer in customers
-                  <tr>
-                      <th scope="row">customer.id</th>
-                      <td>customer.name</td>
-                      <td>customer.phone_number</td>
-                      <td>customer.address</td>
-                      <td>customer.number_of_orders</td>
-                      <td><router-link class="btn btn-primary btn-sm" to="customers/customer.id">Check</router-link></td>
+                <tr v-for="customer in customers">
+                      <th scope="row">{{customer.id}}</th>
+                      <td>{{customer.name}}</td>
+                      <td>{{customer.phone_number}}</td>
+                      <td>{{customer.address}}</td>
+                      <td>{{customer.number_of_orders}}</td>
+                      <td><router-link class="btn btn-primary btn-sm" to="customers/{{customer.id}}">Check</router-link></td>
                   </tr>
-              endfor
               </tbody>
           </table>
       </div>
@@ -66,6 +64,23 @@
 <script>
 export default {
   name: "CustomersView",
+  data (){
+    return{
+      customers: []
+    }
+  },
+  methods: {
+    async fetchCustomers(){
+      const res = await fetch('http://localhost:8000/api/customers/')
+      const data = await res.json()
+      this.customers = data.results
+    }
+  },
+  mounted(){
+    this.fetchCustomers();
+  }
+    
+  
 
 };
 </script>

@@ -59,17 +59,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    for item in inventory
-                        <tr>
-                            <th scope="row">item.id</th>
-                            <td>if item.item_image<img src = "item.item_image.url" width="100" height="100"> {% endif %}</td>
-                            <td>item.item_name</td>
-                            <td class="omr">item.getTotalCost</td>
-                            <td class="omr">item.selling_price</td>
-                            <td>item.remaining_qt</td>
-                            <td><route-link class="btn btn-primary btn-sm" to="/inventory/item.id">Check</route-link></td>
+                        <tr v-for="item in items">
+                            <th scope="row">{{item.id}}</th>
+                            <td v-if="item.item_image"><img src = "item.item_image.url" width="100" height="100"></td>
+                            <td v-else></td>
+                            <td>{{item.item_name}}</td>
+                            <td class="omr">{{item.getTotalCost}}</td>
+                            <td class="omr">{{item.selling_price}}</td>
+                            <td>{{item.remaining_qty}}</td>
+                            <td><route-link class="btn btn-primary btn-sm" to="/inventory/{{item.id}}">Check</route-link></td>
                         </tr>
-                    endfor
                     </tbody>
                 </table>
             </div>
@@ -81,16 +80,27 @@
 <script>
   export default {
     name: 'InventoryView',
-    // methods:{
+    data(){
+        return {
+            items: [],
+        }
+    },
+    methods:{
     //   updateNumberFormat(){
     //     n = document.querySelector(".omr");
     //     for(let i=0;i<n.length;i++){
     //         n[i].innerText=parseFloat(n[i].innerText).toFixed(3);
     //     }
-    //   }
-    // },
-    // beforeMount(){
-    //   this.updateNumberFormat()
-    // },
+    //   },
+      async fetchItems(){
+        const res = await fetch('http://localhost:8000/api/items/')
+        const data = await res.json()
+        this.items = data.results
+      },
+    },
+    mounted(){
+    //   this.updateNumberFormat();
+      this.fetchItems();
+    },
   }
 </script>
