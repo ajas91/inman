@@ -1,7 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <Header />
-    <router-view />
+    <div class="container-fluid">
+      <div class="row mt-2 mb-2 ml-2 mr-2">
+        <router-view />
+      </div>
+    </div>
     <Footer />
   </div>
 </template>
