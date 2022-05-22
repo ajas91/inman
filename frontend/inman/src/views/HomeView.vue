@@ -3,22 +3,21 @@
     <div class="row mb-4 mt-2">
       <div class="col-4">
         <Card card_title="Total Customers" 
-              indicator="" 
+              :indicator="numberOfCustomers" 
               background_color="#c6d8e4"
               card_color="#1A5276"
         />
       </div>
-      {{fetchOrders()}}
       <div class="col-4">
         <Card card_title="Total Items" 
-              indicator="" 
+              :indicator="numberOfItems" 
               background_color="#A9DFBF"
               card_color="#196F3D"
         />
       </div>
       <div class="col-4">
         <Card card_title="Total Orders" 
-              indicator="" 
+              :indicator="numberOfOrders" 
               background_color="#F9E79F"
               card_color="#9A7D0A"
         />
@@ -100,13 +99,35 @@ export default {
   components: {
     Card,
   },
-  methods: {
-    async fetchOrders(){
-      const res = await fetch('http://localhost:8000/api/customers/')
-      const data = await res.json()
-      console.log(data)
+  data (){
+    return{
+      numberOfCustomers: "0",
+      numberOfOrders: "0",
+      numberOfItems: "0"
     }
   },
+  methods: {
+    async fetchCustomers(){
+      const res = await fetch('http://localhost:8000/api/customers/')
+      const data = await res.json()
+      this.numberOfCustomers = data.count.toString()
+    },
+    async fetchOrders(){
+      const res = await fetch('http://localhost:8000/api/orders/')
+      const data = await res.json()
+      this.numberOfOrders = data.count.toString()
+    },
+    async fetchItems(){
+      const res = await fetch('http://localhost:8000/api/items/')
+      const data = await res.json()
+      this.numberOfItems = data.count.toString()
+    }
+  },
+  mounted(){
+    this.fetchItems();
+    this.fetchOrders();
+    this.fetchCustomers();
+  }
 
 };
 </script>
