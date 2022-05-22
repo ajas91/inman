@@ -8,6 +8,7 @@
               card_color="#1A5276"
         />
       </div>
+      {{fetchOrders()}}
       <div class="col-4">
         <Card card_title="Total Items" 
               indicator="" 
@@ -99,5 +100,13 @@ export default {
   components: {
     Card,
   },
+  methods: {
+    async fetchOrders(){
+      const res = await fetch('http://localhost:8000/api/customers/')
+      const data = await res.json()
+      console.log(data)
+    }
+  },
+
 };
 </script>
