@@ -45,7 +45,7 @@
               </tr>
               </thead>
               <tbody>
-                <tr v-for="customer in customers">
+                <tr v-for="customer in this.$root.customersData">
                       <th scope="row">{{customer.id}}</th>
                       <td>{{customer.name}}</td>
                       <td>{{customer.phone_number}}</td>
@@ -66,18 +66,12 @@ export default {
   name: "CustomersView",
   data (){
     return{
-      customers: []
     }
   },
   methods: {
-    async fetchCustomers(){
-      const res = await fetch('http://localhost:8000/api/customers/')
-      const data = await res.json()
-      this.customers = data.results
-    }
+
   },
   mounted(){
-    this.fetchCustomers();
   }
     
   
