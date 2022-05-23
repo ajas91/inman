@@ -3,7 +3,7 @@
     <Header />
     <div class="container-fluid">
       <div class="row mt-2 mb-2 ml-2 mr-2">
-        <router-view />
+        <router-view/>
       </div>
     </div>
     <Footer />
@@ -22,32 +22,30 @@ export default {
   },
 data (){
     return{
-      numberOfCustomers: String,
-      numberOfOrders: String,
-      numberOfItems: String,
+      numberOfCustomers: 0,
+      numberOfOrders: 0,
+      numberOfItems: 0,
       customersData: [],
       ordersData: [],
-      itemsData: []
+      itemsData: [],
     }
   },
   methods: {
     async fetchCustomers(){
-      const res = await fetch('http://localhost:8000/api/customers/')
-      const data = await res.json()
-      this.numberOfCustomers = data.count.toString()
-      this.customersData = data.results
+    // async fetchData(){
+      const dataCustomers = await fetch('http://localhost:8000/api/customers/').then(res => {return res.json()})
+      this.numberOfCustomers = dataCustomers.count//.toString()
+      this.customersData = dataCustomers.results
     },
     async fetchOrders(){
-      const res = await fetch('http://localhost:8000/api/orders/')
-      const data = await res.json()
-      this.numberOfOrders = data.count.toString()
-      this.ordersData = data.results
+      const dataOrders = await fetch('http://localhost:8000/api/orders/').then(res => {return res.json()})
+      this.numberOfOrders = dataOrders.count//.toString()
+      this.ordersData = dataOrders.results
     },
     async fetchItems(){
-      const res = await fetch('http://localhost:8000/api/items/')
-      const data = await res.json()
-      this.numberOfItems = data.count.toString()
-      this.itemsData = data.results
+      const dataItems = await fetch('http://localhost:8000/api/items/').then(res => {return res.json()})
+      this.numberOfItems = dataItems.count//.toString()
+      this.itemsData = dataItems.results
     },
     getCustomer(id){
       var customer = this.$root.customersData.filter(function(el){
