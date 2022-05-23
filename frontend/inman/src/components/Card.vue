@@ -13,7 +13,7 @@ export default{
     name: 'Card',
     props: {
         card_title: String,
-        indicator: String,
+        indicator: Number,
         background_color: String,
         card_color: String,
     },
