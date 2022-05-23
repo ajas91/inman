@@ -46,10 +46,10 @@
               </tr>
               </thead>
               <tbody>
-                  <tr v-for="order in orders">
+                  <tr v-for="order in this.$root.ordersData">
                       <th scope="row">{{order.id}}</th>
-                      <td>{{order.customer.name}}</td>
-                      <td>{{order.customer.phone_number}}</td>
+                      <td>{{this.$root.getCustomer(order.customer)[0].name}}</td>
+                      <td>{{this.$root.getCustomer(order.customer)[0].phone_number}}</td>
                       <td class="omr">{{order.total}}</td>
                       <td>{{order.status}}</td>
                       <td><router-link class="btn btn-primary btn-sm" to="/orders/{{order.id}}">Check</router-link></td>
@@ -67,19 +67,13 @@ export default {
   name: "OrdersView",
   data(){
         return {
-            orders: [],
+
         }
   },
   methods:{
-    async fetchOrders(){
-        const res = await fetch('http://localhost:8000/api/orders/')
-        const data = await res.json()
-        this.orders = data.results
-        console.log(this.orders)
-    },
+
   },
   mounted(){
-    this.fetchOrders();
   },
 };
     // n = document.getElementsByClassName('omr');

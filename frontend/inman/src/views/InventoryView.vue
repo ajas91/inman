@@ -59,7 +59,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in items">
+                        <tr v-for="item in this.$root.itemsData">
                             <th scope="row">{{item.id}}</th>
                             <td v-if="item.item_image"><img src = "item.item_image.url" width="100" height="100"></td>
                             <td v-else></td>
@@ -82,25 +82,18 @@
     name: 'InventoryView',
     data(){
         return {
-            items: [],
         }
     },
-    methods:{
+    // methods:{
     //   updateNumberFormat(){
     //     n = document.querySelector(".omr");
     //     for(let i=0;i<n.length;i++){
     //         n[i].innerText=parseFloat(n[i].innerText).toFixed(3);
     //     }
     //   },
-      async fetchItems(){
-        const res = await fetch('http://localhost:8000/api/items/')
-        const data = await res.json()
-        this.items = data.results
-      },
-    },
-    mounted(){
+    // },
+    // mounted(){
     //   this.updateNumberFormat();
-      this.fetchItems();
-    },
+    // },
   }
 </script>

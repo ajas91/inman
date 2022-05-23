@@ -20,8 +20,46 @@ export default {
     Header,
     Footer,
   },
-  data() {
-    return {}
+data (){
+    return{
+      numberOfCustomers: String,
+      numberOfOrders: String,
+      numberOfItems: String,
+      customersData: [],
+      ordersData: [],
+      itemsData: []
+    }
+  },
+  methods: {
+    async fetchCustomers(){
+      const res = await fetch('http://localhost:8000/api/customers/')
+      const data = await res.json()
+      this.numberOfCustomers = data.count.toString()
+      this.customersData = data.results
+    },
+    async fetchOrders(){
+      const res = await fetch('http://localhost:8000/api/orders/')
+      const data = await res.json()
+      this.numberOfOrders = data.count.toString()
+      this.ordersData = data.results
+    },
+    async fetchItems(){
+      const res = await fetch('http://localhost:8000/api/items/')
+      const data = await res.json()
+      this.numberOfItems = data.count.toString()
+      this.itemsData = data.results
+    },
+    getCustomer(id){
+      var customer = this.$root.customersData.filter(function(el){
+        return el.id == id;
+      });
+      return customer;
+    },
+  },
+  mounted(){
+    this.fetchItems();
+    this.fetchOrders();
+    this.fetchCustomers();
   }
 }
 
