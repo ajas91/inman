@@ -13,6 +13,7 @@
 <script>
 import Header from './components/Header'
 import Footer from './components/Footer'
+import axios from "axios"
 
 export default {
   name:'App',
@@ -31,22 +32,40 @@ data (){
     }
   },
   methods: {
-    async fetchCustomers(){
-    // async fetchData(){
-      const dataCustomers = await fetch('http://localhost:8000/api/customers/').then(res => {return res.json()})
-      this.numberOfCustomers = dataCustomers.count//.toString()
-      this.customersData = dataCustomers.results
+    
+    async fetchData(){
+      try{
+        let [dataCustomers,dataOrders,dataItems] = await Promise.all([
+        axios.get('http://localhost:8000/api/customers/'),
+        axios.get('http://localhost:8000/api/orders/'),
+        axios.get('http://localhost:8000/api/items/')
+      ])
+        this.numberOfCustomers = dataCustomers.data.count//.toString()
+        this.numberOfOrders = dataOrders.data.count//.toString()
+        this.numberOfItems = dataItems.data.count//.toString()
+        this.customersData = dataCustomers.data.results
+        this.itemsData = dataItems.data.results
+        this.ordersData = dataOrders.data.results
+      }
+      catch(err) {
+        console.warn(err)
+      }
     },
-    async fetchOrders(){
-      const dataOrders = await fetch('http://localhost:8000/api/orders/').then(res => {return res.json()})
-      this.numberOfOrders = dataOrders.count//.toString()
-      this.ordersData = dataOrders.results
-    },
-    async fetchItems(){
-      const dataItems = await fetch('http://localhost:8000/api/items/').then(res => {return res.json()})
-      this.numberOfItems = dataItems.count//.toString()
-      this.itemsData = dataItems.results
-    },
+    // async fetchCustomers(){
+    //   const dataCustomers = await axios.get('http://localhost:8000/api/customers/').then(res => {return res.data})
+    //   this.numberOfCustomers = dataCustomers.count//.toString()
+    //   this.customersData = dataCustomers.results
+    // },
+    // async fetchOrders(){
+    //   const dataOrders = await axios.get('http://localhost:8000/api/orders/').then(res => {return res.data})
+    //   this.numberOfOrders = dataOrders.count//.toString()
+    //   this.ordersData = dataOrders.results
+    // },
+    // async fetchItems(){
+    //   const dataItems = await axios.get('http://localhost:8000/api/items/').then(res => {return res.data})
+    //   this.numberOfItems = dataItems.count//.toString()
+    //   this.itemsData = dataItems.results
+    // },
     getCustomer(id){
       var customer = this.$root.customersData.filter(function(el){
         return el.id == id;
@@ -55,9 +74,10 @@ data (){
     },
   },
   mounted(){
-    this.fetchItems();
-    this.fetchOrders();
-    this.fetchCustomers();
+    // this.fetchItems();
+    // this.fetchOrders();
+    // this.fetchCustomers();
+    this.fetchData();
   }
 }
 

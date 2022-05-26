@@ -29,7 +29,7 @@
           <div class="col-sm">
               <div class="card">
                   <div class="card-header">
-                      <h4>Pending Payment<span class="pending">({{this.getFilteredOrders('Pending Payment').length}})</span></h4>
+                      <h4>Pending Payment<span class="pending"> ({{this.getFilteredOrders('Pending Payment').length}})</span></h4>
                   </div>
                   <div class="card-body">
                       <table class="table">
@@ -42,10 +42,10 @@
                           </tr>
                           </thead>
                           <tbody>
-                              <tr v-for="pending in this.getFilteredOrders('Pending Payment')[0]">
-                                  <th scope="row">{{pending.id}}</th>
-                                  <td>{{this.$root.getCustomer(pending.customer)[0].name}}</td>
-                                  <td>{{pending.total}}</td>
+                              <tr v-for="pendingPayment in this.getFilteredOrders('Pending Payment')" :key="pendingPayment.id">
+                                  <th scope="row">{{pendingPayment.id}}</th>
+                                  <td>{{this.$root.getCustomer(pendingPayment.customer)[0].name}}</td>
+                                  <td>{{pendingPayment.total}}</td>
                                   <td><a class="btn btn-primary btn-sm" href="#">Check</a></td>
                               </tr>
                           </tbody>
@@ -57,7 +57,7 @@
           <div class="col-sm">
               <div class="card">
                   <div class="card-header">
-                      <h4>Pending Delivery <span class="pending">({{this.getFilteredOrders('Pending Delivery').length}})</span></h4>
+                      <h4>Pending Delivery <span class="pending"> ({{this.getFilteredOrders('Pending Delivery').length}})</span></h4>
                   </div>
                   <div class="card-body">
                       <table class="table">
@@ -70,10 +70,10 @@
                           </tr>
                           </thead>
                           <tbody>
-                              <tr v-for="pending in this.getFilteredOrders('Pending Delivery')[0]">
-                                  <th scope="row">{{pending.id}}</th>
-                                  <td>{{this.$root.getCustomer(pending.customer)[0].name}}</td>
-                                  <td>{{pending.total}}</td>
+                              <tr v-for="pendingDelivery in this.getFilteredOrders('Pending Delivery')" :key="pendingDelivery.id">
+                                  <th scope="row">{{pendingDelivery.id}}</th>
+                                  <td>{{this.$root.getCustomer(pendingDelivery.customer)[0].name}}</td>
+                                  <td>{{pendingDelivery.total}}</td>
                                   <td><a class="btn btn-primary btn-sm" href="#">Check</a></td>
                               </tr>
                           </tbody>
@@ -95,6 +95,9 @@ export default {
   components: {
     Card,
   },
+  props:{
+
+  },
   data (){
     return{
     }
@@ -108,7 +111,6 @@ export default {
     }
   },
   mounted(){
-  }
-
+  },
 };
 </script>
