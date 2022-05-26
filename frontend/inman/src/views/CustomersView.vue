@@ -45,7 +45,7 @@
               </tr>
               </thead>
               <tbody>
-                <tr v-for="customer in this.$root.customersData">
+                <tr v-for="customer in this.$root.customersData" :key="customer.id">
                       <th scope="row">{{customer.id}}</th>
                       <td>{{customer.name}}</td>
                       <td>{{customer.phone_number}}</td>

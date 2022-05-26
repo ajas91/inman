@@ -46,7 +46,7 @@
               </tr>
               </thead>
               <tbody>
-                  <tr v-for="order in this.$root.ordersData">
+                  <tr v-for="order in this.$root.ordersData" :key="order.id">
                       <th scope="row">{{order.id}}</th>
                       <td>{{this.$root.getCustomer(order.customer)[0].name}}</td>
                       <td>{{this.$root.getCustomer(order.customer)[0].phone_number}}</td>

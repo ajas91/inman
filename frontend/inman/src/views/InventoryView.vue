@@ -59,7 +59,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in this.$root.itemsData">
+                        <tr v-for="item in this.$root.itemsData" :key="item.id">
                             <th scope="row">{{item.id}}</th>
                             <td v-if="item.item_image"><img src = "item.item_image.url" width="100" height="100"></td>
                             <td v-else></td>
