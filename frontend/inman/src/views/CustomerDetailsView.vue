@@ -11,13 +11,17 @@
             <h1> Customer Details </h1>
         </div>
         <div class="card-body">
-            <div class="card-text">
+            <div class="card-text" style="text-align:left">
                 <form class="row g-3" method="POST" action="" enctype="multipart/form-data">
                     <div class="col-md-4">
                         <label for="id" class="form-label">Customer ID</label>
                         <input type="text" class="form-control" v-model="customer_id" readonly>
                     </div>
-                    <div class="col-8"></div>
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <label for="number_of_orders" class="form-label">Total Number of Orders</label>
+                        <input class="form-control" type="number" v-model="customerDetails.number_of_orders" >
+                    </div>
                     <div class="col-6">
                         <label for="name" class="form-label">Customer Name</label>
                         <input v-model="customerDetails.name" class="form-control"/>
@@ -29,10 +33,6 @@
                     <div class="col-12">
                         <label for="address" class="form-label">Customer Address</label>
                         <input class="form-control" v-model="customerDetails.address" />
-                    </div>
-                    <div class="col-3">
-                        <label for="number_of_orders" class="form-label">Number of Orders</label>
-                        <input class="form-control" type="number" v-model="customerDetails.number_of_orders" >
                     </div>
                     <div class="col-9">
                     </div>
