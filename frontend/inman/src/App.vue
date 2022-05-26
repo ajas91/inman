@@ -40,9 +40,9 @@ data (){
         axios.get('http://localhost:8000/api/orders/'),
         axios.get('http://localhost:8000/api/items/')
       ])
-        this.numberOfCustomers = dataCustomers.data.count//.toString()
-        this.numberOfOrders = dataOrders.data.count//.toString()
-        this.numberOfItems = dataItems.data.count//.toString()
+        this.numberOfCustomers = dataCustomers.data.count
+        this.numberOfOrders = dataOrders.data.count
+        this.numberOfItems = dataItems.data.count
         this.customersData = dataCustomers.data.results
         this.itemsData = dataItems.data.results
         this.ordersData = dataOrders.data.results
@@ -51,21 +51,7 @@ data (){
         console.warn(err)
       }
     },
-    // async fetchCustomers(){
-    //   const dataCustomers = await axios.get('http://localhost:8000/api/customers/').then(res => {return res.data})
-    //   this.numberOfCustomers = dataCustomers.count//.toString()
-    //   this.customersData = dataCustomers.results
-    // },
-    // async fetchOrders(){
-    //   const dataOrders = await axios.get('http://localhost:8000/api/orders/').then(res => {return res.data})
-    //   this.numberOfOrders = dataOrders.count//.toString()
-    //   this.ordersData = dataOrders.results
-    // },
-    // async fetchItems(){
-    //   const dataItems = await axios.get('http://localhost:8000/api/items/').then(res => {return res.data})
-    //   this.numberOfItems = dataItems.count//.toString()
-    //   this.itemsData = dataItems.results
-    // },
+
     getCustomer(id){
       var customer = this.$root.customersData.filter(function(el){
         return el.id == id;
