@@ -60,9 +60,6 @@ data (){
     },
   },
   mounted(){
-    // this.fetchItems();
-    // this.fetchOrders();
-    // this.fetchCustomers();
     this.fetchData();
   }
 }
