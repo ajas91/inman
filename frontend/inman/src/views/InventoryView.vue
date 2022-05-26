@@ -67,7 +67,7 @@
                             <td class="omr">{{item.getTotalCost}}</td>
                             <td class="omr">{{item.selling_price}}</td>
                             <td>{{item.remaining_qty}}</td>
-                            <td><route-link class="btn btn-primary btn-sm" to="/inventory/{{item.id}}">Check</route-link></td>
+                            <td><route-link class="btn btn-primary btn-sm" to="/inventory/{{item.id}}" @click="fetchItem(item.id)">Check</route-link></td>
                         </tr>
                     </tbody>
                 </table>
@@ -78,12 +78,21 @@
 
 
 <script>
-  export default {
-    name: 'InventoryView',
-    data(){
-        return {
-        }
-    },
+    import axios from "axios"
+
+    export default {
+        name: 'InventoryView',
+        data(){
+            return {
+                itemsDetails: []
+            }
+        },
+        methods: {
+            async fetchItem(id){
+                this.itemDetails = await this.$root.fetchDetails('items',id)
+            }
+        },
+    
     // methods:{
     //   updateNumberFormat(){
     //     n = document.querySelector(".omr");
@@ -95,5 +104,5 @@
     // mounted(){
     //   this.updateNumberFormat();
     // },
-  }
+    }
 </script>

@@ -52,7 +52,7 @@
                       <td>{{this.$root.getCustomer(order.customer)[0].phone_number}}</td>
                       <td class="omr">{{order.total}}</td>
                       <td>{{order.status}}</td>
-                      <td><router-link class="btn btn-primary btn-sm" to="/orders/{{order.id}}">Check</router-link></td>
+                      <td><router-link class="btn btn-primary btn-sm" to="/orders/" @click="fetchOrder(order.id)">Check</router-link></td>
                   </tr>
               </tbody>
           </table>
@@ -63,15 +63,19 @@
 
 
 <script>
+import axios from "axios"
+
 export default {
   name: "OrdersView",
   data(){
         return {
-
+            orderDetails: []
         }
   },
   methods:{
-
+      async fetchOrder(id){
+          this.orderDetails = await this.$root.fetchDetails('orders',id)
+      }
   },
   mounted(){
   },

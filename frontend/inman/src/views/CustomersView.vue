@@ -51,7 +51,7 @@
                       <td>{{customer.phone_number}}</td>
                       <td>{{customer.address}}</td>
                       <td>{{customer.number_of_orders}}</td>
-                      <td><router-link class="btn btn-primary btn-sm" to="customers/{{customer.id}}">Check</router-link></td>
+                      <td><router-link class="btn btn-primary btn-sm" to="customers/" @click="fetchCustomer(customer.id)">Check</router-link></td>
                   </tr>
               </tbody>
           </table>
@@ -66,10 +66,14 @@ export default {
   name: "CustomersView",
   data (){
     return{
+        customerDetails: []
     }
   },
   methods: {
-
+    async fetchCustomer(id){
+        this.customerDetails = await this.$root.fetchDetails('customers',id)
+        console.log(this.customerDetails.id)
+    }
   },
   mounted(){
   }

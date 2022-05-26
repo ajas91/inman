@@ -58,6 +58,11 @@ data (){
       });
       return customer;
     },
+
+    async fetchDetails(objLink,id){
+      let details = await axios.get(`http://localhost:8000/api/${objLink}/${id}/`)
+      return details.data
+    }
   },
   mounted(){
     this.fetchData();
