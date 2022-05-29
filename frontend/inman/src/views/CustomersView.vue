@@ -66,13 +66,10 @@ export default {
   name: "CustomersView",
   data (){
     return{
-        customerDetails: []
     }
   },
   methods: {
-    async fetchCustomer(id){
-        this.customerDetails = await this.$root.fetchDetails('customers',id)
-    }
+
   },
   mounted(){
   }

@@ -2,7 +2,7 @@
   <div class="customerDetails">
     <div class="row mb-2 mt-2" style="text-align: center;">
         <div class="col-2">
-            <input type=button value="Back" class="btn btn-secondary" onClick="javascript:history.go(-1);">
+            <input type=button value="Back" class="btn btn-secondary" onClick="history.go(-1);">
         </div>
         <div class="col-10"></div>
     </div>
