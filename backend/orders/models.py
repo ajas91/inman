@@ -39,4 +39,4 @@ class OrderLine(models.Model):
     order = models.ForeignKey(Order,on_delete=models.CASCADE,related_name='orderlines')
     
     def __str__(self):
-        return self.item.item_name
+        return str(self.id)
