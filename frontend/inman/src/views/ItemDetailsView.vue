@@ -2,7 +2,7 @@
     <div class="itemDetails">
         <div class="row mb-2 mt-2" style="text-align: center;">
             <div class="col-2">
-                <input type=button value="Back" class="btn btn-secondary" onClick="javascript:history.go(-1);">
+                <input type=button value="Back" class="btn btn-secondary" @click="this.$router.go(-1)">
             </div>
             <div class="col-8"></div>
             <div class="col-2"><router-link class="btn btn-success" to="#">New Category</router-link></div>
