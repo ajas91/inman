@@ -37,7 +37,12 @@ const routes = [
     path: '/orders',
     name: 'orders',
     component: () => import('../views/OrdersView')
-  }
+  },
+  {
+    path: '/orders/:orderID',
+    name: 'orderDetails',
+    component: () => import('../views/OrderDetailsView')
+  },
 ]
 
 const router = createRouter({
