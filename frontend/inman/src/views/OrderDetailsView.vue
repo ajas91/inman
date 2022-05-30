@@ -22,7 +22,9 @@
                         </div>
                         <div class="col-6">
                             <label for="customer" class="form-label">Customer Name</label>
-                            <select class="form-select" name="customer" id="customer" v-for="customer in customers" :key="customer.id" :select="customer.id == orderDetails.customer">({{customer.id}}) {{customer.name}}</select>
+                            <select class="form-select" name="customer" id="customer">
+                                <option v-for="customer in customers" :key="customer.id" :selected="customer.id == orderDetails.customer">({{customer.id}}) {{customer.name}}</option>
+                            </select>
                         </div>
                         <div class="col-6">
                             <label for="status" class="form-label">Order Status</label>
@@ -52,7 +54,7 @@
                         <tbody id="orders">
                             <tr class="orderline" v-for="orderLine in orderLines" :key="orderLine.id">
                                 <th>{{orderLine.item}}</th>
-                                <td><input type="text" v-model="orderLine.item.selling_price" id="unit_price" class="form-control unit_price" readonly></td>
+                                <td><input type="text" v-model="orderLine.item" id="unit_price" class="form-control unit_price" readonly></td>
                                 <td>{{orderLine.qty}}</td>
                                 <td class="omr" id="discount">{{orderLine.disc}}</td>
                                 <td class="omr" id="total_price_">{{orderLine.total_price}}</td>
@@ -90,6 +92,8 @@
 
 
 <script>
+import { thisExpression } from '@babel/types';
+
 export default {
   name: "OrderDetailsView",
   props:{
@@ -99,21 +103,28 @@ export default {
     return {
       orderDetails: [],
       order_id: String,
-      customers: [{id:'1',name:'Ali'}],
+      customers: [],
       orderLines: []
     }
   },
   methods: {
     async fetchOrder(id){
-      this.orderDetails = await this.$root.fetchDetails('orders',id)
-      console.log(this.orderDetails)
+        Promise.all([this.orderDetails = await this.$root.fetchDetails('orders',id),
+            await this.fetchOrderLines(this.orderDetails.orderlines)
+        ])
+    },
+    async fetchOrderLines(ids){
+        for(const id of ids){
+            this.orderLines.push(this.$root.fetchDetails('orderline',id))
+            }           
+        console.log(this.orderLines[0])
     }
   },
   created(){
     this.order_id = this.$route.params.orderID
   },
   mounted(){
-    Promise.all([this.fetchOrder(this.order_id)])
+    Promise.all([this.fetchOrder(this.order_id)])//,this.fetchOrderLines(this.orderDetails.orderlines)])
   }
 };
     // n = document.getElementsByClassName('omr');
