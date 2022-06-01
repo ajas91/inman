@@ -5,12 +5,12 @@ from django.contrib.auth.models import User
 
 class OrderSerializer(serializers.ModelSerializer):
     # created_by = serializers.ReadOnlyField(source='created_by.username')
-    orderlines = serializers.StringRelatedField(many=True)
+    order_set = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Order
         fields = ['id', 'customer','order_date','total',
-                  'status','orderlines','created_by', 
+                  'status','order_set','created_by', 
                  ]
 
 

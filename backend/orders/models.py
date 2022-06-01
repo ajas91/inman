@@ -36,7 +36,7 @@ class OrderLine(models.Model):
     qty = models.IntegerField(default=1)
     disc = models.FloatField(default=0.0)
     total_price = models.FloatField(default=0.0)
-    order = models.ForeignKey(Order,on_delete=models.CASCADE,related_name='orderlines')
+    order = models.ForeignKey(Order,on_delete=models.CASCADE,related_name='order_set')
     
     def __str__(self):
         return str(self.id)
