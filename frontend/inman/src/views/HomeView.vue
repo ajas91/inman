@@ -46,7 +46,7 @@
                                   <th scope="row">{{pendingPayment.id}}</th>
                                   <td>{{this.$root.getCustomer(pendingPayment.customer)[0].name}}</td>
                                   <td>{{pendingPayment.total}}</td>
-                                  <td><a class="btn btn-primary btn-sm" href="#">Check</a></td>
+                                  <td><router-link class="btn btn-primary btn-sm" :to="{name:'orderDetails',params:{orderID:pendingPayment.id}}">Check</router-link></td>
                               </tr>
                           </tbody>
                       </table>
@@ -74,7 +74,7 @@
                                   <th scope="row">{{pendingDelivery.id}}</th>
                                   <td>{{this.$root.getCustomer(pendingDelivery.customer)[0].name}}</td>
                                   <td>{{pendingDelivery.total}}</td>
-                                  <td><a class="btn btn-primary btn-sm" href="#">Check</a></td>
+                                  <td><router-link class="btn btn-primary btn-sm" :to="{name:'orderDetails',params:{orderID:pendingDelivery.id}}">Check</router-link></td>
                               </tr>
                           </tbody>
                       </table>
