@@ -28,7 +28,9 @@
                         </div>
                         <div class="col-6">
                             <label for="status" class="form-label">Order Status</label>
-                            <select class="form-select" name="status" id="status"> </select>
+                            <select class="form-select" name="status" id="status">
+                                <option v-for="s in status" :key="s.id" :selected="s.name == orderDetails.status">{{s.name}}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -92,7 +94,6 @@
 
 
 <script>
-import { thisExpression } from '@babel/types';
 
 export default {
   name: "OrderDetailsView",
@@ -104,7 +105,8 @@ export default {
       orderDetails: [],
       order_id: String,
       customers: [],
-      orderLines: []
+      orderLines: [],
+      status: [{id: 1, name:'New'},{id:2,name:'Pending Payment'},{id:3,name:'Pending Delivery'},{id:4,name:'Done'}]
     }
   },
   methods: {
@@ -112,19 +114,19 @@ export default {
         Promise.all([this.orderDetails = await this.$root.fetchDetails('orders',id),
             await this.fetchOrderLines(this.orderDetails.orderlines)
         ])
+        console.log(this.customers)
     },
     async fetchOrderLines(ids){
         for(const id of ids){
             this.orderLines.push(this.$root.fetchDetails('orderline',id))
             }           
-        console.log(this.orderLines[0])
     }
   },
   created(){
     this.order_id = this.$route.params.orderID
   },
   mounted(){
-    Promise.all([this.fetchOrder(this.order_id)])//,this.fetchOrderLines(this.orderDetails.orderlines)])
+    Promise.all([this.fetchOrder(this.order_id),this.customers = this.$root.customersData])//,this.fetchOrderLines(this.orderDetails.orderlines)])
   }
 };
     // n = document.getElementsByClassName('omr');
