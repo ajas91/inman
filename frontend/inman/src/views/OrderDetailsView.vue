@@ -55,11 +55,15 @@
                         </thead>
                         <tbody id="orders">
                             <tr class="orderline" v-for="orderLine in orderLines" :key="orderLine.id">
-                                <th>{{orderLine.item}}</th>
+                                <th>
+                                    <select name="orderline_item" id="orderline_item" class="form-select">
+                                        <option v-for="item in items" :key="item.id" :selected="item.id == orderLine.item">{{item.item_name}}</option>
+                                    </select>
+                                </th>
                                 <td><input type="text" v-model="orderLine.item" id="unit_price" class="form-control unit_price" readonly></td>
-                                <td>{{orderLine.qty}}</td>
-                                <td class="omr" id="discount">{{orderLine.disc}}</td>
-                                <td class="omr" id="total_price_">{{orderLine.total_price}}</td>
+                                <td><input type="number" class="form-control" id="disc" v-model="orderLine.qty"></td>
+                                <td class="omr" id="discount"><input type="number" class="form-control" id="disc" v-model="orderLine.disc"></td>
+                                <td class="omr" id="total_price_"><input type="text" v-model="orderLine.total_price" id="unit_price" class="form-control unit_price" readonly></td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -94,6 +98,7 @@
 
 
 <script>
+import axios from "axios"
 
 export default {
   name: "OrderDetailsView",
@@ -106,27 +111,27 @@ export default {
       order_id: String,
       customers: [],
       orderLines: [],
-      status: [{id: 1, name:'New'},{id:2,name:'Pending Payment'},{id:3,name:'Pending Delivery'},{id:4,name:'Done'}]
+      status: [{id: 1, name:'New'},{id:2,name:'Pending Payment'},{id:3,name:'Pending Delivery'},{id:4,name:'Done'}],
+      items: []
     }
   },
   methods: {
     async fetchOrder(id){
         Promise.all([this.orderDetails = await this.$root.fetchDetails('orders',id),
-            await this.fetchOrderLines(this.orderDetails.orderlines)
+            await this.fetchOrderLines(id)
         ])
-        console.log(this.customers)
+        console.log(this.items)
     },
-    async fetchOrderLines(ids){
-        for(const id of ids){
-            this.orderLines.push(this.$root.fetchDetails('orderline',id))
-            }           
+    async fetchOrderLines(id){
+        let orderlineDetails = await axios.get(`http://localhost:8000/api/orderline?order=${id}`)
+        this.orderLines = orderlineDetails.data.results
     }
   },
   created(){
     this.order_id = this.$route.params.orderID
   },
   mounted(){
-    Promise.all([this.fetchOrder(this.order_id),this.customers = this.$root.customersData])//,this.fetchOrderLines(this.orderDetails.orderlines)])
+    Promise.all([this.fetchOrder(this.order_id),this.customers = this.$root.customersData, this.items = this.$root.itemsData])
   }
 };
     // n = document.getElementsByClassName('omr');
