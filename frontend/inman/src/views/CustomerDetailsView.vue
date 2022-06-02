@@ -20,11 +20,11 @@
                     <div class="col-4"></div>
                     <div class="col-4">
                         <label for="number_of_orders" class="form-label">Total Number of Orders</label>
-                        <input class="form-control" type="number" v-model="customerDetails.number_of_orders" >
+                        <input class="form-control" type="number" v-model="customerDetails.number_of_orders" readonly>
                     </div>
                     <div class="col-6">
                         <label for="name" class="form-label">Customer Name</label>
-                        <input v-model="customerDetails.name" class="form-control"/>
+                        <input v-model="customerDetails.name" class="form-control" :readonly="customer_id != 'new'"/>
                     </div>
                     <div class="col-6">
                         <label for="phone_number" class="form-label">Customer Phone Number</label>
