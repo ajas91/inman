@@ -36,13 +36,13 @@
                     </div>
                     <div class="col-9">
                     </div>
-                    <div class="col-6">
+                    <div class="col-6" v-if="customer_id === 'new'">
                         <input class="btn btn-success" type="submit" name="update" value="Add"/>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6" v-if="customer_id != 'new'">
                         <input class="btn btn-success" type="submit" name="update" value="Update"/>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6" v-if="customer_id != 'new'">
                         <input class="btn btn-danger" type="submit" name="delete" value="Delete"/>
                     </div>
                 </form>
