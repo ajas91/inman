@@ -40,7 +40,7 @@
                         <input class="btn btn-success" type="submit" name="update" value="Add"/>
                     </div>
                     <div class="col-6" v-if="customer_id != 'new'">
-                        <input class="btn btn-success" type="submit" name="update" value="Update"/>
+                        <a class="btn btn-success" href="/customers" @click.native="updateCustomer(customer_id)">Update</a>
                     </div>
                     <div class="col-6" v-if="customer_id != 'new'">
                         <a class="btn btn-danger" href="/customers" @click.native="deleteCustomer(customer_id)">Delete</a>
@@ -73,6 +73,9 @@ export default {
     },
     async deleteCustomer(id){
       await axios.delete(`http://localhost:8000/api/customers/${id}/`)
+    },
+    async updateCustomer(id){
+      await axios.put(`http://localhost:8000/api/customers/${id}/`,this.customerDetails)
     }
   },
   created(){
