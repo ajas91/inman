@@ -43,7 +43,7 @@
                         <input class="btn btn-success" type="submit" name="update" value="Update"/>
                     </div>
                     <div class="col-6" v-if="customer_id != 'new'">
-                        <input class="btn btn-danger" type="submit" name="delete" value="Delete"/>
+                        <a class="btn btn-danger" href="/customers" @click.native="deleteCustomer(customer_id)">Delete</a>
                     </div>
                 </form>
             </div>
@@ -54,6 +54,8 @@
 
 
 <script>
+import axios from "axios"
+
 export default {
   name: "CustomerDetailsView",
   props:{
@@ -68,6 +70,9 @@ export default {
   methods: {
     async fetchCustomer(id){
       this.customerDetails = await this.$root.fetchDetails('customers',id)
+    },
+    async deleteCustomer(id){
+      await axios.delete(`http://localhost:8000/api/customers/${id}/`)
     }
   },
   created(){
