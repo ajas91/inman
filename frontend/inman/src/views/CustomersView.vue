@@ -29,7 +29,7 @@
       
       <div class="row mb-2 mt-2" style="text-align: right;">
           <div class="col-9"></div>
-          <!-- <div class="col-2"><router-link class="btn btn-success" to="/customers/new_customer">New Customer</router-link></div> -->
+          <div class="col-2"><router-link class="btn btn-success" :to="{name:'customerDetails', params:{customerID: 'new'}}">New Customer</router-link></div>
       </div>
       
       <div class="row mb-2">
