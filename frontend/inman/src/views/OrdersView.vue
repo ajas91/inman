@@ -30,7 +30,7 @@
       
       <div class="row mb-2 mt-2" style="text-align: right;">
           <div class="col-10"></div>
-          <div class="col-2"><router-link class="btn btn-success" to="/orders/new_order">New Order</router-link></div>
+          <div class="col-2"><router-link class="btn btn-success" :to="{name:'orderDetails',params:{orderID:'new'}}">New Order</router-link></div>
       </div>
       
       <div class="row mb-2">
