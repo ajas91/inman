@@ -75,18 +75,15 @@
                             <input class="form-control" type="number" name="total" id="total" v-model="orderDetails.total" readonly>
                         </div>
                         <div class="col-12"> <br></div>
-                        if status == 'new'
-                            <div class="col-12" style="text-align: center;">
-                                <input type="submit" name="update" class="btn btn-success" value="Add">
-                            </div>
-                        else
-                            <div class="col-6">
-                                <input type="submit" name="update" class="btn btn-success" value="Update">
-                            </div>
-                            <div class="col-6">
-                                <input type="submit" name="delete" class="btn btn-danger" value="Delete">
-                            </div>
-                        endif
+                        <div class="col-12" style="text-align: center;" v-if="order_id == 'new'">
+                            <input type="submit" name="update" class="btn btn-success" value="Add">
+                        </div>
+                        <div class="col-6">
+                            <input type="submit" name="update" class="btn btn-success" value="Update" v-if="order_id != 'new'">
+                        </div>
+                        <div class="col-6">
+                            <input type="submit" name="delete" class="btn btn-danger" value="Delete" v-if="order_id != 'new'" @click="deleteOrder(order_id)">
+                        </div>
                     </div>
                 </div>
             </div>            
@@ -117,21 +114,38 @@ export default {
   },
   methods: {
     async fetchOrder(id){
-        Promise.all([this.orderDetails = await this.$root.fetchDetails('orders',id),
-            await this.fetchOrderLines(id)
-        ])
-        console.log(this.items)
+        if(this.order_id != 'new'){
+            Promise.all([this.orderDetails = await this.$root.fetchDetails('orders',id),
+                await this.fetchOrderLines(id)
+            ])
+        }
+        console.log(this.order_id)
     },
     async fetchOrderLines(id){
         let orderlineDetails = await axios.get(`http://localhost:8000/api/orderline?order=${id}`)
         this.orderLines = orderlineDetails.data.results
+    },
+    async deleteOrder(id){
+        Promise.all([
+            //await axios.delete(`http://localhost:8000/api/orderline?order=${id}`),
+            await axios.delete(`http://localhost:8000/api/orders/${id}/`),
+        ])
+    },
+    async addOrder(){
+        Promise.all([
+            //await axios.post(`http://localhost:8000/api/orderline/`,this.orderLines),
+            await axios.post(`http://localhost:8000/api/orders/`,this.orderDetails)
+        ])
+        
     }
   },
   created(){
     this.order_id = this.$route.params.orderID
   },
-  mounted(){
-    Promise.all([this.fetchOrder(this.order_id),this.customers = this.$root.customersData, this.items = this.$root.itemsData])
+  mounted(){      
+        Promise.all([this.fetchOrder(this.order_id),
+                     this.customers = this.$root.customersData, 
+                     this.items = this.$root.itemsData])
   }
 };
     // n = document.getElementsByClassName('omr');
