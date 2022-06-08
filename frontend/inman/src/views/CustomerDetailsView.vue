@@ -37,7 +37,7 @@
                     <div class="col-9">
                     </div>
                     <div class="col-6" v-if="customer_id === 'new'">
-                        <input class="btn btn-success" type="submit" name="update" value="Add"/>
+                        <a class="btn btn-success" href="/customers" @click.native="createCustomer()">Add</a>
                     </div>
                     <div class="col-6" v-if="customer_id != 'new'">
                         <a class="btn btn-success" href="/customers" @click.native="updateCustomer(customer_id)">Update</a>
@@ -69,13 +69,18 @@ export default {
   },
   methods: {
     async fetchCustomer(id){
-      this.customerDetails = await this.$root.fetchDetails('customers',id)
+      if (this.customer_id != 'new'){
+        this.customerDetails = await this.$root.fetchDetails('customers',id)
+      }
     },
     async deleteCustomer(id){
       await axios.delete(`http://localhost:8000/api/customers/${id}/`)
     },
     async updateCustomer(id){
       await axios.put(`http://localhost:8000/api/customers/${id}/`,this.customerDetails)
+    },
+    async createCustomer(){
+      await axios.post(`http://localhost:8000/api/customers/`,this.customerDetails)
     }
   },
   created(){

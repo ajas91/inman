@@ -14,7 +14,18 @@ class CustomersViewSet(viewsets.ModelViewSet):
     """
     queryset = Customer.objects.all()
     serializer_class = CustomersSerializer
+    
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
 
+        if serializer.is_valid():
+            name = serializer.data.get('name')
+            phone_number = serializer.data.get('phone_number')
+            address = serializer
+            customer = Customer(name=name,phone_number=phone_number,address=address)
+            customer.save()
+
+        print(serializer.errors)        
     # def perform_create(self, serializer):
     #     serializer.save(created_by=self.request.user)
 
