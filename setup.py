@@ -1,31 +1,41 @@
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
+conn = None #Initialize conn to None
 
-#establishing the connection
-conn = psycopg2.connect(
-   database="postgres", user='postgres', password='12345', host='127.0.0.1', port= '5433'
-)
-conn.autocommit = True
+try:
+   #establishing the connection
+   conn = psycopg2.connect(
+      database="postgres", user='postgres', password='12345', host='172.17.0.1', port= '5432'
+   )
+   conn.autocommit = True
+   conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT) # <-- ADD THIS LINE
 
-conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT) # <-- ADD THIS LINE
+   #Creating a cursor object using the cursor() method
+   cursor = conn.cursor()
 
-#Creating a cursor object using the cursor() method
-cursor = conn.cursor()
+   #Preparing query to create a database
+   dbname = 'inman'
+   username = 'inman'
+   password = 'inman'
+   create_db_sql = f"""CREATE database {dbname};
+            """
+   #Creating a database
+   cursor.execute(create_db_sql)
 
-#Preparing query to create a database
-dbname = 'inman'
-username = 'inman'
-password = 'inman'
-sql = f"""CREATE database {dbname};
-          """
-#Creating a database
-cursor.execute(sql)
-cursor.execute(f"""
-         create user {username} with encrypted password '{password}';
-         grant all privileges on database {dbname} to {username};"""
-         )
-print("Database created successfully........")
+   # Creating a user and granting privileges
+   create_user_sql = f"""
+      CREATE USER {username} WITH ENCRYPTED PASSWORD '{password}';
+      GRANT ALL PRIVILEGES ON DATABASE {dbname} TO {username};
+   """
+   cursor.execute(create_user_sql)
 
-#Closing the connection
-conn.close()
+   print("Database created successfully........")
+
+except psycopg2.OperationalError as e:
+    print("Unable to connect to the database.")
+    print(e)
+finally:
+    if conn:
+        # Closing the connection
+        conn.close()
